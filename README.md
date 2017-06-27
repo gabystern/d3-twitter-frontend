@@ -1,9 +1,7 @@
 # Twitter D3 Visualizer
 > Visualize patterns in how the world is talking. <br>
-[![N|Solid](http://krispo.github.io/angular-nvd3/img/icons/d3.png)]() <br>
-Built with D3.js 
 
-Twitter D3 Visualizer is an data visualization tool that enables users to search tweets by hashtag and create a variety of interactive graphs to map the prevalence/impact of a hashtag over a period of time. This application has a React frontend and a <a href="https://github.com/gabystern/d3-twitter-backend">Rails backend</a>. 
+Twitter D3 Visualizer is an data visualization tool that enables users to search tweets by hashtag and create a variety of interactive graphs to map the prevalence/impact of a hashtag over a period of time. This application has a React frontend with D3 graphs and a <a href="https://github.com/gabystern/d3-twitter-backend">Rails backend</a>. 
 
 # Landing Page
 See examples of graphs before you sign up
