@@ -38,12 +38,6 @@ class App extends Component {
     return (
       <div>
         < Graph tweets={this.state.tweets}/>
-        <ul>{this.state.tweets.map((tweet) => {
-          return (
-            <li>{tweet.content}</li>
-          )
-         })}
-        </ul>
       </div>
     )
   }
