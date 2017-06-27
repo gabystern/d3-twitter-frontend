@@ -7,7 +7,8 @@ Twitter D3 Visualizer is an data visualization tool that enables users to search
 # Landing Page
 See examples of graphs before you sign up
 
- 
+ ![Alt text](./public/assets/User Home Screen.png?raw=true "Title") 
+
 # User Homepage
 See all of your saved graphs and click in navbar to create new graphs
 
