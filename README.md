@@ -1,6 +1,7 @@
 # Twitter D3 Visualizer
-> Visualize patterns in how the world is talking. 
-Powered by D3.js
+> Visualize patterns in how the world is talking. <br>
+Built with D3.js <br>
+[![N|Solid](http://krispo.github.io/angular-nvd3/img/icons/d3.png)]()
 
 Twitter D3 Visualizer is an data visualization tool that enables users to search tweets by hashtag and create a variety of interactive graphs to map the prevalence/impact of a hashtag over a period of time. 
 
