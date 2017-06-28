@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import Graph from './components/graph'
+import ScatterPlotShow from '../components/ScatterPlotShow'
+import StreamGraph from '../components/StreamGraph'
+import HomePage from '../components/HomePage'
+import NavBar from '../components/NavBar'
+import { Route, Switch } from 'react-router-dom'
 
-class App extends Component {
+class AccountsContainer extends Component {
 
   constructor(){
     super()
     this.state = {
+      charts: [],
       tweets: [],
-      searchTerm: "travelban"
+      searchTerm: ""
     }
     this.mapTweets = this.mapTweets.bind(this)
     this.filteredTweets = this.filteredTweets.bind(this)
@@ -17,6 +22,9 @@ class App extends Component {
     fetch('http://localhost:3000/api/v1/tweets')
     .then(resp => resp.json())
     .then(tweets => { this.setState({ tweets }) })
+    fetch('http://localhost:3000/api/v1/charts')
+    .then(resp => resp.json())
+    .then(charts => { this.setState({ charts })})
   }
 
   filteredTweets(){
@@ -37,10 +45,17 @@ class App extends Component {
   render() {
     return (
       <div>
-        < Graph tweets={this.state.tweets}/>
+        < NavBar />
+        <Switch>
+          <Route exact path ='/home' render={() => < HomePage /> } />
+          <Route exact path="/scatterplot" render={()=> < ScatterPlotShow tweets={this.state.tweets}/>} />
+          <Route exact path="/streamgraph" render={()=> < StreamGraph tweets={this.state.tweets} />} />
+        </Switch>
       </div>
     )
   }
+
+
 }
 
-export default App;
+export default AccountsContainer;
