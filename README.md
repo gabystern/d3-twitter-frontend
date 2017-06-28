@@ -23,3 +23,8 @@ Search a Twitter hashtag to get populated graphs and save the search to your pro
 View previously created graphs and download them to your computer to embed in articles or presentations. 
 
  ![Alt text](./public/assets/Saved_Graph.png?raw=true "Title") 
+
+# Stack
+- React Frontend
+- Rails API Backend
+- D3 Graphs
