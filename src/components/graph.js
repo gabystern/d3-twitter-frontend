@@ -8,6 +8,8 @@ import { nest } from 'd3';
 import { axisLeft } from 'd3';
 import { scale } from 'd3';
 import { scaleTime } from 'd3';
+import { style } from 'd3-selection';
+import { event } from 'd3'
 
 export default class Graph extends Component {
 
@@ -18,7 +20,7 @@ export default class Graph extends Component {
   render(){
     let data = this.props.tweets
 
-    var w = 900;
+    var w = 600;
     var h = 500;
     var margin = {
     	top: 60,
@@ -31,33 +33,28 @@ export default class Graph extends Component {
 
     var parseTime = d3.timeParse("%m/%d/%Y");
 
-    //create svg element
-    // var svg = d3.select("body").append("svg")
-  	// 		.attr("id", "chart")
-  	// 		.attr("width", w)
-  	// 		.attr("height", h);
-
-    var svg = d3.select("body").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+    var svg = select("#root")
+        .append("svg")
+        .attr("id", "chart")
+        .attr("width", w)
+        .attr("height", h)
       .append("g")
         .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")");
 
-    //create chart
     var chart = svg.append("g")
-  			.classed("display", true)
-  			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  		.classed("display", true)
+  		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var x = d3.scaleTime()
-        .domain(extent(data, function(d){
-          let date = parseTime(d.tweet_created_at)
-          return date
-        }))
-        .range([0, width]);
+      .domain(d3.extent(data, function(d){
+        let date = parseTime(d.tweet_created_at)
+      return date
+      }))
+      .range([-2, width]);
     var y = scaleLinear()
-        .domain([1, data.length])
-        .range([height, 0]);
+      .domain([1, data.length])
+      .range([height, 0]);
 
     svg.append("text")
       .attr("x", width / 2 )
@@ -74,18 +71,42 @@ export default class Graph extends Component {
       .text("Number of Tweets");
 
     svg.append("g")
-          .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x));
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
 
     svg.append("g")
       .call(d3.axisLeft(y));
 
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
 
     var tweetCount = d3.nest()
       .key(function(d) { return d.tweet_created_at; })
       .rollup(function(v) { return v.length; })
-      .entries(data);
-      console.log(tweetCount)
+      .entries(data)
+
+    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
+    var pageX = function (d,d3) {
+      return d3.event.pageX;
+    }
+    var pageY = function (d,d3){
+      return d3.event.pageY;
+    }
+
+    function mouseover() {
+      tooltip.style("display", "inline");
+    }
+
+    function mousemove() {
+      tooltip
+        .text("hello")
+        .style("left", (pageX) + "px")
+        .style("top", (pageY) + "px");
+    }
+
+    function mouseout() {
+      tooltip.style("display", "none");
+    }
 
     function plot(params){
     	//enter()
@@ -93,7 +114,24 @@ export default class Graph extends Component {
     		.data(params.data)
     		.enter()
     			.append("circle")
-    			.classed("point", true);
+          .style("fill", "paleturquoise")
+          .style("opacity",0.1)
+          .on("mouseover",function(d,i){
+                d3.select(this)
+                    .style("fill","darkturquoise")
+                    .style("opacity", 1)
+            })
+          .on("mouseout",function(d,i){
+                d3.select(this)
+                    .transition()
+                    .duration(300)
+                    .style("fill","paleturquoise");
+          })
+          .on("mouseover", mouseover)
+          .on("mousemove", mousemove)
+          .on("mouseout", mouseout)
+    			.classed("point", true)
+
     	//update
     	this.selectAll(".point")
     		.attr("r", function(d){
@@ -105,9 +143,11 @@ export default class Graph extends Component {
         })
     		.attr("cx", function(d){
           let date = d.tweet_created_at.substr(0,20)+ d.tweet_created_at.substr(26, 30)
-    			return x(parseTime(date));
+    			let changed = x(parseTime(date)) - 75;
+          return changed
     		})
-    		.attr("cy", 100);
+    		.attr("cy", data.length/2);
+
 
     	//exit()
     	this.selectAll(".point")
