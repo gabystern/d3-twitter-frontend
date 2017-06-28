@@ -10,16 +10,16 @@ See examples of graphs before you sign up
  ![Alt text](./public/assets/Landing_Page.png?raw=true "Title") 
 
 ## User Homepage
-See all of your saved graphs and click in navbar to create new graphs
+See all of your saved searchess and click in navbar to create a new search
 
  ![Alt text](./public/assets/User_Home_Screen.png?raw=true "Title") 
 
-## Create a New Graph
-Search a Twitter hashtag to get a populated graph and save it to your profile
+## Create a New Search
+Search a Twitter hashtag to get populated graphs and save the search to your profile
 
  ![Alt text](./public/assets/Create_New_Graph.png?raw=true "Title") 
 
-## View a Graph & Download it as an SVG
-View a previously created graph and download it to your computer to embed it in your articles or presentations. 
+## View Graphs & Download as an SVG
+View previously created graphs and download them to your computer to embed in articles or presentations. 
 
  ![Alt text](./public/assets/Saved_Graph.png?raw=true "Title") 
