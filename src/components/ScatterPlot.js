@@ -19,6 +19,7 @@ export default class ScatterPlot extends Component {
 
   render(){
     let data = this.props.tweets
+    console.log(data[0])
 
     var w = 600;
     var h = 500;
