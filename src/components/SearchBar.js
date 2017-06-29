@@ -1,15 +1,16 @@
 import React from 'react';
 
 const SearchBar = (props) => {
+  console.log(props)
   return(
     <div>
-      <div className="ui search">
-        <div className="ui icon input">
-          <input className="prompt" type="text" placeholder="Search a hashtag" onClick={props.handleChange}/>
-          <i className="search icon"></i>
-        </div>
-        <div className="results"></div>
-      </div>
+    <input
+            type="text"
+            value={props.searchTerm}
+            onChange={props.handleChange}
+            placeholder={"Enter a hashtag"}
+          />
+    <input type="button" onClick={props.handleClick} />
     </div>
   )
 }
