@@ -11,7 +11,7 @@ import { scaleTime } from 'd3';
 import { style } from 'd3-selection';
 import { event } from 'd3'
 
-export default class Graph extends Component {
+export default class ScatterPlot extends Component {
 
   constructor(props){
     super(props)
@@ -19,6 +19,7 @@ export default class Graph extends Component {
 
   render(){
     let data = this.props.tweets
+    console.log(data[0])
 
     var w = 600;
     var h = 500;
@@ -93,21 +94,6 @@ export default class Graph extends Component {
       return d3.event.pageY;
     }
 
-    function mouseover() {
-      tooltip.style("display", "inline");
-    }
-
-    function mousemove() {
-      tooltip
-        .text("hello")
-        .style("left", (pageX) + "px")
-        .style("top", (pageY) + "px");
-    }
-
-    function mouseout() {
-      tooltip.style("display", "none");
-    }
-
     function plot(params){
     	//enter()
     	this.selectAll(".point")
@@ -120,16 +106,21 @@ export default class Graph extends Component {
                 d3.select(this)
                     .style("fill","darkturquoise")
                     .style("opacity", 1)
+                tooltip.style("display", "inline");
             })
+          .on("mousemove", function(d,i){
+            tooltip
+              .text("hello")
+              .style("left", (pageX) + "px")
+              .style("top", (pageY) + "px");
+          })
           .on("mouseout",function(d,i){
                 d3.select(this)
                     .transition()
                     .duration(300)
                     .style("fill","paleturquoise");
+                tooltip.style("display", "none");
           })
-          .on("mouseover", mouseover)
-          .on("mousemove", mousemove)
-          .on("mouseout", mouseout)
     			.classed("point", true)
 
     	//update
@@ -143,8 +134,8 @@ export default class Graph extends Component {
         })
     		.attr("cx", function(d){
           let date = d.tweet_created_at.substr(0,20)+ d.tweet_created_at.substr(26, 30)
-    			let changed = x(parseTime(date)) - 75;
-          return changed
+    			let parsedDate = x(parseTime(date)) - 75;
+          return parsedDate
     		})
     		.attr("cy", data.length/2);
 
@@ -161,7 +152,8 @@ export default class Graph extends Component {
     })
 
     return (
-      <div></div>
+      <div>
+      </div>
     )
   }
 
