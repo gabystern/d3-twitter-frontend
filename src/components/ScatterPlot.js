@@ -25,8 +25,7 @@ export default class ScatterPlot extends Component {
     }
     this.x = d3.scaleTime()
         .domain([new Date(new Date().setHours(0,0,0,0)), new Date(new Date().setHours(24,0,0,0))])
-        .range([0, 960]);
-    // this.parseTime = d3.timeParse("%m/%d/%Y");
+        .range([0, 400]);
     this.margin = {
       top: 60,
       bottom: 80,
@@ -38,6 +37,10 @@ export default class ScatterPlot extends Component {
     this.h = 500;
     this.height = this.h - this.margin.top - this.margin.bottom;
     this.createSvg = this.createSvg.bind(this)
+    this.parseTime = function dateFromString(str) {
+      var m = str.match(/(\d+)-(\d+)-(\d+)[\sT]+(\d+):(\d+):(\d+)[.+](\d+)/)
+      return new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +m[6] * 100);
+    }
     // this.tweetCount = d3.nest()
     //   .key(function(d) { return d.tweet_created_at; })
     //   .rollup(function(v) { return v.length; })
@@ -60,7 +63,7 @@ export default class ScatterPlot extends Component {
       .attr("transform", "translate(" + 80 + "," + 60 + ")");
 
     var y = scaleLinear()
-      .domain([1, this.data.length])
+      .domain([1, 300])
       .range([this.height, 0]);
 
     svg.append("text")
@@ -118,9 +121,12 @@ export default class ScatterPlot extends Component {
       .attr("r", 30)
       .attr("cx", function(d){
         let cxDate = d.tweet_created_at
-        let parseTime = d3.timeParse("%m/%d/%Y");
+        let parseTime = function dateFromString(str) {
+          var m = str.match(/(\d+)-(\d+)-(\d+)[\sT]+(\d+):(\d+):(\d+)[.+](\d+)/)
+          return new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +m[6] * 100);
+        }
         let testX = d3.scaleTime()
-            .domain([new Date(new Date().setHours(0,0,0,0)), new Date(new Date().setHours(24,0,0,0))])
+            .domain([new Date(new Date().setHours(0,0,0,0)), new Date(new Date().setHours(14,0,0,0))])
             .range([0, 960]);
         let parsedDate = testX(parseTime(cxDate)) - 75;
         return parsedDate
@@ -130,7 +136,6 @@ export default class ScatterPlot extends Component {
 
     //exit()
     chart.selectAll(".point")
-      .data(this.props.tweets)
       .exit()
       .remove();
 
