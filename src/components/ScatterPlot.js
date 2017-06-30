@@ -16,7 +16,7 @@ export default class ScatterPlot extends Component {
   constructor(props){
     super(props)
     this.data = this.props.tweets
-    this.tooltip = d3.select("body").append("div").attr("class", "toolTip");
+    // this.tooltip = d3.select("body").append("div").attr("class", "toolTip");
     this.pageX = function (d,d3) {
       return d3.event.pageX;
     }
@@ -24,9 +24,8 @@ export default class ScatterPlot extends Component {
       return d3.event.pageY;
     }
     this.x = d3.scaleTime()
-        .domain([new Date(new Date().setHours(0,0,0,0)), new Date(new Date().setHours(24,0,0,0))])
-        .range([0, 960]);
-    // this.parseTime = d3.timeParse("%m/%d/%Y");
+        .domain([new Date(new Date().setHours(0,0,0,0)), new Date(new Date().setHours(48,0,0,0))])
+        .range([0, 1000]);
     this.margin = {
       top: 60,
       bottom: 80,
@@ -38,29 +37,35 @@ export default class ScatterPlot extends Component {
     this.h = 500;
     this.height = this.h - this.margin.top - this.margin.bottom;
     this.createSvg = this.createSvg.bind(this)
-    // this.tweetCount = d3.nest()
-    //   .key(function(d) { return d.tweet_created_at; })
-    //   .rollup(function(v) { return v.length; })
-    //   .entries(this.data)
-
+    this.parseTime = function dateFromString(str) {
+      var m = str.match(/(\d+)-(\d+)-(\d+)[\sT]+(\d+):(\d+):(\d+)[.+](\d+)/)
+      return new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +m[6] * 100);
+    }
+    this.tweetCount = d3.nest()
+      .key(function(d){
+        console.log(d.tweet_created_at);
+        debugger
+      })
+      .rollup(function(v) { return v.length; })
+      .entries(this.data)
   }
 
   createSvg = () => {
     let svg = select("#root")
       .append("svg")
-      .attr("id", "chart")
-      .attr("width", this.w)
-      .attr("height", this.h)
+        .attr("id", "chart")
+        .attr("width", this.w)
+        .attr("height", this.h)
       .append("g")
-      .attr("transform",
-      "translate(" + this.margin.left + "," + this.margin.top + ")");
+        .attr("transform",
+        "translate(" + this.margin.left + "," + this.margin.top + ")");
 
     let chart = svg.append("g")
       .classed("display", true)
       .attr("transform", "translate(" + 80 + "," + 60 + ")");
 
     var y = scaleLinear()
-      .domain([1, this.data.length])
+      .domain([1, 300])
       .range([this.height, 0]);
 
     svg.append("text")
@@ -85,52 +90,56 @@ export default class ScatterPlot extends Component {
       .call(d3.axisLeft(y));
   }
 
-  plot = (chart) => {
-    chart.selectAll(".point")
+  plot = (svg) => {
+    svg.selectAll(".point")
       .data(this.props.tweets)
       .enter()
         .append("circle")
-        .style("fill", "paleturquoise")
-        .style("opacity",0.1)
+        .style("fill", "red")
         .on("mouseover",function(d,i){
               d3.select(this)
-                  .style("fill","darkturquoise")
-                  .style("opacity", 1)
-              this.tooltip.style("display", "inline");
+                  .style("fill","orange")
+                  .style("opacity", 0.8)
+              // this.tooltip.style("display", "inline");
           })
-        .on("mousemove", function(d,i){
-          this.tooltip
-            .text("hello")
-            .style("left", (this.pageX) + "px")
-            .style("top", (this.pageY) + "px");
-        })
+        // .on("mousemove", function(d,i){
+        //   this.tooltip
+        //     .text("hello")
+        //     .style("left", (this.pageX) + "px")
+        //     .style("top", (this.pageY) + "px");
+        // })
         .on("mouseout",function(d,i){
               d3.select(this)
                   .transition()
                   .duration(300)
-                  .style("fill","paleturquoise");
-              this.tooltip.style("display", "none");
+                  .style("fill","red");
+              // this.tooltip.style("display", "none");
         })
         .classed("point", true)
 
     //update
-    chart.selectAll(".point")
-      .attr("r", 30)
+    svg.selectAll(".point")
+      .attr("r", function(d){
+        this.tweetCount()
+      })
       .attr("cx", function(d){
         let cxDate = d.tweet_created_at
-        let parseTime = d3.timeParse("%m/%d/%Y");
+        let parseTime = function dateFromString(str) {
+          var m = str.match(/(\d+)-(\d+)-(\d+)[\sT]+(\d+):(\d+):(\d+)[.+](\d+)/)
+          return new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +m[6]);
+        }
         let testX = d3.scaleTime()
-            .domain([new Date(new Date().setHours(0,0,0,0)), new Date(new Date().setHours(24,0,0,0))])
-            .range([0, 960]);
-        let parsedDate = testX(parseTime(cxDate)) - 75;
+            .domain([new Date(new Date().setHours(0,0,0,0)), new Date(new Date().setHours(48,0,0,0))])
+            .range([0, 1000]);
+        let parsedDate = testX(parseTime(cxDate)) - 50;
         return parsedDate
       })
       .attr("cy", this.props.tweets.length/2);
 
 
+
     //exit()
-    chart.selectAll(".point")
-      .data(this.props.tweets)
+    svg.selectAll(".point")
       .exit()
       .remove();
 
