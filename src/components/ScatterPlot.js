@@ -89,6 +89,7 @@ export default class ScatterPlot extends Component {
   }
 
   plot = (chart) => {
+    debugger
     chart.selectAll(".point")
       .data(this.props.tweets)
       .enter()
@@ -132,6 +133,7 @@ export default class ScatterPlot extends Component {
         return parsedDate
       })
       .attr("cy", this.props.tweets.length/2);
+
 
 
     //exit()
