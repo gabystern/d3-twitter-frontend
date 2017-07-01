@@ -10,7 +10,7 @@ const SearchBar = (props) => {
             onChange={props.handleChange}
             placeholder={"Enter a hashtag"}
           />
-    <input type="button" onClick={props.handleClick} />
+    <input type="button" onClick={props.handleClick} className="button" />
     </div>
   )
 }

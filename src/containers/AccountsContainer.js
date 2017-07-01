@@ -15,6 +15,7 @@ class AccountsContainer extends Component {
       tweets: [],
       searchTerm: ""
     }
+    this.forceUpdate = this.forceUpdate.bind(this)
   }
 
   componentDidMount(){
@@ -45,7 +46,10 @@ class AccountsContainer extends Component {
     .then(tweets => this.setState({
             tweets: tweets
           }))
-    this.props.history.push('/scatterplot')
+  }
+
+  handleRemoveClick(){
+    this.forceUpdate()
   }
 
   render() {
@@ -54,7 +58,7 @@ class AccountsContainer extends Component {
         < NavBar />
         <Switch>
           <Route exact path ='/home' render={() => < HomePage /> } />
-          <Route exact path="/scatterplot" render={()=> <div>< ScatterPlotShow tweets={this.state.tweets} searchTerm={this.state.searchTerm} handleClick={this.handleClick.bind(this)} handleChange={(event) => this.handleChange(event)} /> </div>} />
+          <Route exact path="/scatterplot" render={()=> <div>< ScatterPlotShow tweets={this.state.tweets} searchTerm={this.state.searchTerm} handleClick={this.handleClick.bind(this)} handleChange={(event) => this.handleChange(event)} handleRemoveClick={this.handleRemoveClick.bind(this)}/> </div>} />
           <Route exact path="/streamgraph" render={()=> < StreamGraph tweets={this.state.tweets} />} />
         </Switch>
       </div>
