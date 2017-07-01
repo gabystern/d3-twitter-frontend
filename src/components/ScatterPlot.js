@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RemoveButton from './RemoveButton'
 import * as d3 from 'd3';
 import { scaleLinear } from 'd3-scale';
 import { select } from 'd3-selection';
@@ -16,16 +17,7 @@ export default class ScatterPlot extends Component {
   constructor(props){
     super(props)
     this.data = this.props.tweets
-    // this.tooltip = d3.select("body").append("div").attr("class", "toolTip");
-    this.pageX = function (d,d3) {
-      return d3.event.pageX;
-    }
-    this.pageY = function (d,d3){
-      return d3.event.pageY;
-    }
-    this.x = d3.scaleTime()
-        .domain([new Date(new Date().setHours(0,0,0,0)), new Date(new Date().setHours(48,0,0,0))])
-        .range([0, 1000]);
+
     this.margin = {
       top: 60,
       bottom: 80,
@@ -33,24 +25,17 @@ export default class ScatterPlot extends Component {
       right: 80
     };
     this.width = this.w - this.margin.left - this.margin.right;
-    this.w = 600;
+    this.w = 800;
     this.h = 500;
     this.height = this.h - this.margin.top - this.margin.bottom;
     this.createSvg = this.createSvg.bind(this)
-    this.parseTime = function dateFromString(str) {
-      var m = str.match(/(\d+)-(\d+)-(\d+)[\sT]+(\d+):(\d+):(\d+)[.+](\d+)/)
-      return new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +m[6] * 100);
-    }
-    this.tweetCount = d3.nest()
-      .key(function(d){
-        console.log(d.tweet_created_at);
-        debugger
-      })
-      .rollup(function(v) { return v.length; })
-      .entries(this.data)
+
+    this.pendingRender = this.pendingRender.bind(this)
   }
 
+
   createSvg = () => {
+
     let svg = select("#root")
       .append("svg")
         .attr("id", "chart")
@@ -63,13 +48,40 @@ export default class ScatterPlot extends Component {
     let chart = svg.append("g")
       .classed("display", true)
       .attr("transform", "translate(" + 80 + "," + 60 + ")");
+  }
 
-    var y = scaleLinear()
-      .domain([1, 300])
+  plot = (svg) => {
+
+    let parsedTimeArray = this.props.tweets.map(function(d){
+      let epoch = Date.parse(d.tweet_created_at)
+      let newDate = new Date(epoch)
+      return newDate
+    })
+    let min = d3.min(parsedTimeArray)
+    let max = d3.max(parsedTimeArray)
+
+    let retweets = this.props.tweets.map(function(d){
+      return d.retweet_count
+    })
+
+    let retweetColor = d3.nest()
+      .key(function(d) { return d.retweet_count; })
+      .entries(this.props.tweets)
+
+    let y = d3.scaleLinear()
+      .domain([-0.1, d3.max(retweets)+1])
       .range([this.height, 0]);
 
+    let x = d3.scaleTime()
+      .domain([min, max])
+      .range([0, 1000])
+
+    let linearColorScale = d3.scaleLinear()
+      .domain([0, retweetColor.length])
+      .range(['red','green'])
+
     svg.append("text")
-      .attr("x", this.width / 2 )
+      .attr("x", 640 / 2 )
       .attr("y",  this.height + this.margin.top + 20)
       .style("text-anchor", "middle")
       .text("Date");
@@ -80,83 +92,89 @@ export default class ScatterPlot extends Component {
       .attr("x",0 - (this.height / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
-      .text("Number of Tweets");
+      .text("Number of Retweets/Tweet");
 
     svg.append("g")
       .attr("transform", "translate(0," + this.height + ")")
-      .call(d3.axisBottom(this.x));
+      .call(d3.axisBottom(x));
 
     svg.append("g")
       .call(d3.axisLeft(y));
-  }
 
-  plot = (svg) => {
-    svg.selectAll(".point")
+    var g = svg.append("svg:g");
+
+    g.selectAll("scatter-dots")
       .data(this.props.tweets)
       .enter()
         .append("circle")
-        .style("fill", "red")
-        .on("mouseover",function(d,i){
-              d3.select(this)
-                  .style("fill","orange")
-                  .style("opacity", 0.8)
-              // this.tooltip.style("display", "inline");
-          })
-        // .on("mousemove", function(d,i){
-        //   this.tooltip
-        //     .text("hello")
-        //     .style("left", (this.pageX) + "px")
-        //     .style("top", (this.pageY) + "px");
-        // })
-        .on("mouseout",function(d,i){
-              d3.select(this)
-                  .transition()
-                  .duration(300)
-                  .style("fill","red");
-              // this.tooltip.style("display", "none");
+        .classed("test", true)
+        .style("fill", function(d,i){
+          if (d.retweet_count > 30){
+            return 'red'
+          } else if (d.retweet_count > 10) {
+            return 'darkturquoise'
+          } else if (d.retweet_count >= 4) {
+            return 'palegreen'
+          } else if (d.retweet_count < 4) {
+            return 'paleturquoise'
+          }
         })
-        .classed("point", true)
+        .style("opacity", 0.8)
+        .attr("cx", function(d){
+            let epoch = Date.parse(d.tweet_created_at)
+            let newDate = new Date(epoch)
+            return x(newDate)
+          })
+        .attr("cy", function(d){
+          return y(d.retweet_count)
+        })
+        .attr("r", function(d){
+          return (d.retweet_count*2)
+        });
+    //
+    // d3.select(".button")
+    //   .on("click", function() {
+    //     this.forceUpdate()
+  // })
+    }
 
-    //update
-    svg.selectAll(".point")
-      .attr("r", function(d){
-        this.tweetCount()
-      })
-      .attr("cx", function(d){
-        let cxDate = d.tweet_created_at
-        let parseTime = function dateFromString(str) {
-          var m = str.match(/(\d+)-(\d+)-(\d+)[\sT]+(\d+):(\d+):(\d+)[.+](\d+)/)
-          return new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +m[6]);
-        }
-        let testX = d3.scaleTime()
-            .domain([new Date(new Date().setHours(0,0,0,0)), new Date(new Date().setHours(48,0,0,0))])
-            .range([0, 1000]);
-        let parsedDate = testX(parseTime(cxDate)) - 50;
-        return parsedDate
-      })
-      .attr("cy", this.props.tweets.length/2);
-
-
-
-    //exit()
-    svg.selectAll(".point")
-      .exit()
-      .remove();
-
-  }
 
   componentDidMount(){
     this.createSvg()
   }
 
+  pendingRender(){
+    if (this.props.tweets.length === 0){
+      console.log("pending")
+    } else {
+      this.plot(d3.select(".display"))
+    }
+  }
+
+  // componentDidUpdate(prevProps, prevState){
+  //   if (prevProps.tweets.length !== 0){
+  //     if (prevProps.tweets !== this.props.tweets){
+  //       document.getElementsByClassName("display").remove()
+  //     }
+  //   }
+  // }
+
+  // handleClick(){
+  //   debugger
+  // }
+
+
   render(){
     console.log(this.props.tweets)
     console.log(d3.select(".display"))
-    this.plot(d3.select(".display"))
+    this.pendingRender()
 
     return (
-      <svg>
-      </svg>
+      <div>
+        < RemoveButton onClick={this.props.handleRemoveClick} />
+        <svg>
+        </svg>
+      </div>
     )
   }
 
