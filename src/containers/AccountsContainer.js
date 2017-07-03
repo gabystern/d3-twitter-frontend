@@ -48,9 +48,6 @@ class AccountsContainer extends Component {
           }))
   }
 
-  handleRemoveClick(){
-    this.forceUpdate()
-  }
 
   render() {
     return (
@@ -58,7 +55,7 @@ class AccountsContainer extends Component {
         < NavBar />
         <Switch>
           <Route exact path ='/home' render={() => < HomePage /> } />
-          <Route exact path="/scatterplot" render={()=> <div>< ScatterPlotShow tweets={this.state.tweets} searchTerm={this.state.searchTerm} handleClick={this.handleClick.bind(this)} handleChange={(event) => this.handleChange(event)} handleRemoveClick={this.handleRemoveClick.bind(this)}/> </div>} />
+          <Route exact path="/scatterplot" render={()=> <div>< ScatterPlotShow tweets={this.state.tweets} searchTerm={this.state.searchTerm} handleClick={this.handleClick.bind(this)} handleChange={(event) => this.handleChange(event)} /> </div>} />
           <Route exact path="/streamgraph" render={()=> <div>< StreamGraphShow tweets={this.state.tweets} searchTerm={this.state.searchTerm} handleClick={this.handleClick.bind(this)} handleChange={(event) => this.handleChange(event)} /> </div>} />
         </Switch>
       </div>

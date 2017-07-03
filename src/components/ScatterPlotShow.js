@@ -7,7 +7,7 @@ const ScatterPlotShow = (props) => {
   return(
     <div>
       < SearchBar searchTerm={props.searchTerm} handleClick={props.handleClick} handleChange={props.handleChange} />
-      < ScatterPlot tweets={props.tweets} handleRemoveClick={props.handleRemoveClick} />
+      < ScatterPlot tweets={props.tweets} />
     </div>
   )
 }

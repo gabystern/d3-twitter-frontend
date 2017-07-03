@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import RemoveButton from './RemoveButton'
 import * as d3 from 'd3';
-import { scaleLinear } from 'd3-scale';
-import { select } from 'd3-selection';
-import { extent } from 'd3';
-import { timeParse } from 'd3-time-format';
-import { nest } from 'd3';
-import { axisLeft } from 'd3';
-import { scale } from 'd3';
-import { scaleTime } from 'd3';
-import { style } from 'd3-selection';
-import { event } from 'd3'
+// import { scaleLinear } from 'd3-scale';
+// import { select } from 'd3-selection';
+import { extent, nest, axisLeft, scale, scaleTime, style, event, select, scaleLinear, timeParse} from 'd3';
+// import { timeParse } from 'd3-time-format';
+// import { nest } from 'd3';
+// import { axisLeft } from 'd3';
+// import { scale } from 'd3';
+// import { scaleTime } from 'd3';
+// import { style } from 'd3-selection';
+// import { event } from 'd3'
+import { tip } from 'd3-tip'
 
 export default class ScatterPlot extends Component {
 
@@ -50,7 +50,7 @@ export default class ScatterPlot extends Component {
       .attr("transform", "translate(" + 80 + "," + 60 + ")");
   }
 
-  plot = (svg) => {
+  plot = (svg, tweets) => {
 
     let parsedTimeArray = this.props.tweets.map(function(d){
       let epoch = Date.parse(d.tweet_created_at)
@@ -101,7 +101,11 @@ export default class ScatterPlot extends Component {
     svg.append("g")
       .call(d3.axisLeft(y));
 
-    var g = svg.append("svg:g");
+    let g = svg.append("svg:g");
+
+    let div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
     g.selectAll("scatter-dots")
       .data(this.props.tweets)
@@ -130,51 +134,55 @@ export default class ScatterPlot extends Component {
         })
         .attr("r", function(d){
           return (d.retweet_count*2)
-        });
+        })
+        .on("mouseover", function(d) {
+         div.transition()
+           .duration(200)
+           .style("opacity", .9);
+         div.html(new Date(Date.parse(d.tweet_created_at)) + "<br/>" + d.username + "<br/>" + d.content)
+           .style("left", (d3.event.pageX) + "px")
+           .style("top", (d3.event.pageY) + "px");
+         })
+       .on("mouseout", function(d) {
+         div.transition()
+           .duration(500)
+           .style("opacity", 0);
+         });
+      }
 
-    g.selectAll("scatter-dots")
-      .exit()
-      .remove()
-    }
-
+  shouldComponentUpdate(nextProps){
+    return this.props.tweets !== nextProps.tweets
+  }
 
   componentDidMount(){
     this.createSvg()
   }
 
+  componentDidUpdate(prevProps){
+    if (prevProps.tweets.length !== 0 && this.props.tweets !== prevProps.tweets) {
+      let root = document.getElementById('root')
+      let chart = document.getElementById('chart')
+      chart.parentNode.removeChild(chart)
+      this.createSvg()
+      this.plot(d3.select(".display"), this.props.tweets)
+    }
+  }
+
+
   pendingRender(){
     if (this.props.tweets.length === 0){
       console.log("pending")
     } else {
-      this.plot(d3.select(".display"))
+      this.plot(d3.select(".display"), this.props.tweets)
     }
   }
 
-  // shouldComponentUpdate(nextProps, nextState){
-  //   if (nextProps.tweets[0] !== this.props.tweets){
-  //     return true
-  //   }
-  // }
-
-  // componentWillUpdate(nextProps, nextState){
-  //   if (this.props.tweets.length > 0 && nextProps.tweets.length > 0){
-  //     this.props.tweets = nextProps.tweets
-  //   }
-  // }
-
-  // handleClick(){
-  //   debugger
-  // }
-
 
   render(){
-    console.log(this.props.tweets)
-    console.log(d3.select(".display"))
     this.pendingRender()
 
     return (
       <div>
-        < RemoveButton onClick={this.props.handleRemoveClick} />
       </div>
     )
   }
