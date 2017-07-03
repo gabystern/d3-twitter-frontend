@@ -131,11 +131,10 @@ export default class ScatterPlot extends Component {
         .attr("r", function(d){
           return (d.retweet_count*2)
         });
-    //
-    // d3.select(".button")
-    //   .on("click", function() {
-    //     this.forceUpdate()
-  // })
+
+    g.selectAll("scatter-dots")
+      .exit()
+      .remove()
     }
 
 
@@ -151,11 +150,15 @@ export default class ScatterPlot extends Component {
     }
   }
 
-  // componentDidUpdate(prevProps, prevState){
-  //   if (prevProps.tweets.length !== 0){
-  //     if (prevProps.tweets !== this.props.tweets){
-  //       document.getElementsByClassName("display").remove()
-  //     }
+  // shouldComponentUpdate(nextProps, nextState){
+  //   if (nextProps.tweets[0] !== this.props.tweets){
+  //     return true
+  //   }
+  // }
+
+  // componentWillUpdate(nextProps, nextState){
+  //   if (this.props.tweets.length > 0 && nextProps.tweets.length > 0){
+  //     this.props.tweets = nextProps.tweets
   //   }
   // }
 
@@ -172,8 +175,6 @@ export default class ScatterPlot extends Component {
     return (
       <div>
         < RemoveButton onClick={this.props.handleRemoveClick} />
-        <svg>
-        </svg>
       </div>
     )
   }

@@ -4,7 +4,7 @@ const RemoveButton = (props) => {
 
   return(
     <button className="ui button" onClick={props.onClick}>
-      Follow
+      Remove
     </button>
   )
 }

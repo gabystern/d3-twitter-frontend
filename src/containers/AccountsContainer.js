@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ScatterPlotShow from '../components/ScatterPlotShow'
-import StreamGraph from '../components/StreamGraph'
+import StreamGraphShow from '../components/StreamGraphShow'
 import SearchBar from '../components/SearchBar'
 import HomePage from '../components/HomePage'
 import NavBar from '../components/NavBar'
@@ -59,7 +59,7 @@ class AccountsContainer extends Component {
         <Switch>
           <Route exact path ='/home' render={() => < HomePage /> } />
           <Route exact path="/scatterplot" render={()=> <div>< ScatterPlotShow tweets={this.state.tweets} searchTerm={this.state.searchTerm} handleClick={this.handleClick.bind(this)} handleChange={(event) => this.handleChange(event)} handleRemoveClick={this.handleRemoveClick.bind(this)}/> </div>} />
-          <Route exact path="/streamgraph" render={()=> < StreamGraph tweets={this.state.tweets} />} />
+          <Route exact path="/streamgraph" render={()=> <div>< StreamGraphShow tweets={this.state.tweets} searchTerm={this.state.searchTerm} handleClick={this.handleClick.bind(this)} handleChange={(event) => this.handleChange(event)} /> </div>} />
         </Switch>
       </div>
     )
