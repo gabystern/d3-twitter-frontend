@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ScatterPlotShow from '../components/ScatterPlotShow'
-import StreamGraphShow from '../components/StreamGraphShow'
+import ScatterPlot from '../components/ScatterPlot'
+import StreamGraph from '../components/StreamGraph'
 import SearchBar from '../components/SearchBar'
 import HomePage from '../components/HomePage'
 import NavBar from '../components/NavBar'
@@ -13,9 +13,11 @@ class AccountsContainer extends Component {
     this.state = {
       charts: [],
       tweets: [],
-      searchTerm: ""
+      searchTerm: "",
+      loader: true
     }
-    this.forceUpdate = this.forceUpdate.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount(){
@@ -44,7 +46,8 @@ class AccountsContainer extends Component {
     })
     .then(resp => resp.json() )
     .then(tweets => this.setState({
-            tweets: tweets
+            tweets: tweets,
+            loader: true
           }))
   }
 
@@ -55,8 +58,8 @@ class AccountsContainer extends Component {
         < NavBar />
         <Switch>
           <Route exact path ='/home' render={() => < HomePage /> } />
-          <Route exact path="/scatterplot" render={()=> <div>< ScatterPlotShow tweets={this.state.tweets} searchTerm={this.state.searchTerm} handleClick={this.handleClick.bind(this)} handleChange={(event) => this.handleChange(event)} /> </div>} />
-          <Route exact path="/streamgraph" render={()=> <div>< StreamGraphShow tweets={this.state.tweets} searchTerm={this.state.searchTerm} handleClick={this.handleClick.bind(this)} handleChange={(event) => this.handleChange(event)} /> </div>} />
+          <Route exact path="/scatterplot" render={()=> <div>< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> </div>} />
+          <Route exact path="/streamgraph" render={()=> <div>< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} /> </div>} />
         </Switch>
       </div>
     )
