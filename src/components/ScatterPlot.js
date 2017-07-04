@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-// import { scaleLinear } from 'd3-scale';
-// import { select } from 'd3-selection';
 import { extent, nest, axisLeft, scale, scaleTime, style, event, select, scaleLinear, timeParse} from 'd3';
-// import { timeParse } from 'd3-time-format';
-// import { nest } from 'd3';
-// import { axisLeft } from 'd3';
-// import { scale } from 'd3';
-// import { scaleTime } from 'd3';
-// import { style } from 'd3-selection';
-// import { event } from 'd3'
 import { tip } from 'd3-tip'
 
 export default class ScatterPlot extends Component {
 
   constructor(props){
     super(props)
+    this.state = {
+      load: true
+    }
     this.data = this.props.tweets
 
     this.margin = {
@@ -76,10 +70,6 @@ export default class ScatterPlot extends Component {
       .domain([min, max])
       .range([0, 1000])
 
-    let linearColorScale = d3.scaleLinear()
-      .domain([0, retweetColor.length])
-      .range(['red','green'])
-
     svg.append("text")
       .attr("x", 640 / 2 )
       .attr("y",  this.height + this.margin.top + 20)
@@ -111,7 +101,7 @@ export default class ScatterPlot extends Component {
       .data(this.props.tweets)
       .enter()
         .append("circle")
-        .classed("test", true)
+        .classed("dot", true)
         .style("fill", function(d,i){
           if (d.retweet_count > 30){
             return 'red'
@@ -158,6 +148,12 @@ export default class ScatterPlot extends Component {
     this.createSvg()
   }
 
+  componentWillReceiveProps(prevProps){
+    this.setState({
+      load: true
+    })
+  }
+
   componentDidUpdate(prevProps){
     if (prevProps.tweets.length !== 0 && this.props.tweets !== prevProps.tweets) {
       let root = document.getElementById('root')
@@ -165,26 +161,27 @@ export default class ScatterPlot extends Component {
       chart.parentNode.removeChild(chart)
       this.createSvg()
       this.plot(d3.select(".display"), this.props.tweets)
+      this.setState({
+        load: false
+      })
     }
   }
 
-
   pendingRender(){
-    if (this.props.tweets.length === 0){
-      console.log("pending")
-    } else {
-      this.plot(d3.select(".display"), this.props.tweets)
-    }
+    this.plot(d3.select(".display"), this.props.tweets)
   }
 
 
   render(){
     this.pendingRender()
-
-    return (
-      <div>
-      </div>
-    )
+      if (this.props.loader === false) {
+        return ( <p>Loading...</p> )
+      } else {
+        return (
+          <div>
+          </div>
+        )
+      }
   }
 
 
