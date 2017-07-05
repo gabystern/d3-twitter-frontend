@@ -98,29 +98,27 @@ export default class StreamGraph extends Component {
       .key(function(d) { return d.sentiment })
       .entries(this.props.tweets)
     //array of negative scores
-    let layer0 = origNest[0].values.map(function(d) {
-      let parsedDate = new Date(Date.parse(d.tweet_created_at))
-      return {negative: 0, positive: d.sentiment_score, neutral: 0, date: parsedDate, totalVal: d.sentiment_score} })
-    
-    //array of neutral scores
-    let layer1 = origNest[1].values.map(function(d) {
-      let parsedDate = new Date(Date.parse(d.tweet_created_at))
-      return {negative: 0, positive: 0, neutral: d.sentiment_score, date: parsedDate, totalVal: d.sentiment_score} })
-    //array of positive scores
-    let layer2 = origNest[2].values.map(function(d) {
-      let parsedDate = new Date(Date.parse(d.tweet_created_at))
-      return {negative: d.sentiment_score, positive: 0, neutral: 0, date: parsedDate, totalVal: d.sentiment_score} })
-
-    let newData = layer0.concat(layer1).concat(layer2)
+    let layers = this.props.tweets.map(function(tweet){
+      if (tweet.sentiment === "positive"){
+        let parsedDate = new Date(Date.parse(tweet.tweet_created_at))
+        return {positive: tweet.sentiment_score, negative: 0, neutral: 0, date: parsedDate, totalVal: tweet.sentiment_score}
+      } else if (tweet.sentiment === "negative"){
+        let parsedDate = new Date(Date.parse(tweet.tweet_created_at))
+        return {positive: 0, negative: tweet.sentiment_score, neutral: 0, date: parsedDate, totalVal: tweet.sentiment_score}
+      } else {
+        let parsedDate = new Date(Date.parse(tweet.tweet_created_at))
+        return {positive: 0, negative: 0, neutral: tweet.sentiment_score, date: parsedDate, totalVal: tweet.sentiment_score}
+      }
+    })
 
 
-    this.createArea(x, y, svg, newData)
+    this.createArea(x, y, svg, layers)
   }
 
-  createArea(x, y, svg, newData){
+  createArea(x, y, svg, layers){
 
     let stack = d3.stack().keys(["negative", "positive", "neutral"])
-    var series = stack(newData)
+    var series = stack(layers)
     console.log(series)
     var color = d3.scaleLinear()
       .range(["#aad", "#556"]);
@@ -137,6 +135,16 @@ export default class StreamGraph extends Component {
        .attr("d", area)
        .style("fill", function() { return color(Math.random()); });
 
+  }
+  
+  componentDidUpdate(prevProps){
+    if (prevProps.tweets.length !== 0 && this.props.tweets !== prevProps.tweets) {
+      let root = document.getElementById('root')
+      let chart = document.getElementById('chart')
+      chart.parentNode.removeChild(chart)
+      this.createSvg()
+      this.plot(d3.select(".display"), this.props.tweets)
+    }
   }
 
   pendingRender(){
