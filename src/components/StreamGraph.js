@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { scaleLinear } from 'd3-scale';
 import { select } from 'd3-selection';
 import { stack, area } from 'd3-shape'
-import { nest } from 'd3';
+import { color } from 'd3';
 
 
 export default class StreamGraph extends Component {
@@ -65,6 +65,7 @@ export default class StreamGraph extends Component {
       .domain([min, max])
       .range([0, 1000])
 
+
     svg.append("text")
       .attr("x", 640 / 2 )
       .attr("y",  this.height + this.margin.top + 20)
@@ -99,70 +100,44 @@ export default class StreamGraph extends Component {
     //array of negative scores
     let layer0 = origNest[0].values.map(function(d) {
       let parsedDate = new Date(Date.parse(d.tweet_created_at))
-      return {key: d.sentiment, value: d.sentiment_score, date: parsedDate} })
-    // let layer0x = origNest[0].values.map((d) => d.tweet_created_at)
+      return {negative: 0, positive: d.sentiment_score, neutral: 0, date: parsedDate, totalVal: d.sentiment_score} })
+    
     //array of neutral scores
     let layer1 = origNest[1].values.map(function(d) {
       let parsedDate = new Date(Date.parse(d.tweet_created_at))
-      return {key: d.sentiment, value: d.sentiment_score, date: parsedDate} })
+      return {negative: 0, positive: 0, neutral: d.sentiment_score, date: parsedDate, totalVal: d.sentiment_score} })
     //array of positive scores
     let layer2 = origNest[2].values.map(function(d) {
       let parsedDate = new Date(Date.parse(d.tweet_created_at))
-      return {key: d.sentiment, value: d.sentiment_score, date: parsedDate} })
+      return {negative: d.sentiment_score, positive: 0, neutral: 0, date: parsedDate, totalVal: d.sentiment_score} })
 
     let newData = layer0.concat(layer1).concat(layer2)
-    console.log(newData)
 
-    let nest = d3.nest()
-      .key(function(d) { return d.key })
-      .entries(newData)
 
-    this.createArea(layer1, x, y, svg, newData, nest)
+    this.createArea(x, y, svg, newData)
   }
 
-  createArea(layer1, x, y, svg, newData, nest){
-    let stack = d3.stack()
-      .keys(function(d){ return d.key })
-    debugger
-    // let series = stack(newData)
-    let area = d3.area()
-      .x(function(d) {d.date})
-      .y0(this.height)
-      .y1(function(d) { return y(d.value); });
+  createArea(x, y, svg, newData){
 
-    let valueline = d3.line()
-      .x(function(d) { return x(d.date); })
-      .y(function(d) { return y(d.value); });
+    let stack = d3.stack().keys(["negative", "positive", "neutral"])
+    var series = stack(newData)
+    console.log(series)
+    var color = d3.scaleLinear()
+      .range(["#aad", "#556"]);
 
-    svg.append("path")
-       .data([layer1])
-       .attr("class", "area")
-       .attr("d", area);
+    var area = d3.area()
+      .x(function(d) {return x(d.data.date) })
+      .y1(function(d) { return y(d.data.totalVal); })
+      .y0(y(0))
+      .curve(d3.curveBasis);
 
-    svg.append("path")
-      .data([layer1])
-      .attr("class", "line")
-      .attr("d", valueline);
+    svg.selectAll("path")
+       .data(series)
+       .enter().append("path")
+       .attr("d", area)
+       .style("fill", function() { return color(Math.random()); });
+
   }
-
-
-
-    // g.selectAll("areas")
-    //   .data(this.props.tweets)
-    //   .enter()
-    //   .append("area")
-    //   .classed("area", true)
-    //   .attr("x", function(d){
-    //     let epoch = Date.parse(d.tweet_created_at)
-    //     let newDate = new Date(epoch)
-    //     return x(newDate)-500
-    //   })
-    //   .attr("y1", function(d){ return y(d.sentiment_score)})
-    //   .attr("y0", y(0))
-        // .x(function(d) { return x(d.tweet_created_at) })
-        // .y1(function(d) { return y(d.sentiment_score)  })
-        // .y0(y(0));
-
 
   pendingRender(){
     if (this.props.tweets.length === 0){
