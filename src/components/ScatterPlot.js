@@ -94,8 +94,8 @@ export default class ScatterPlot extends Component {
     let g = svg.append("svg:g");
 
     let div = d3.select("body").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
+      .attr("class", "tooltip")
+      .style("opacity", 0);
 
     g.selectAll("scatter-dots")
       .data(this.props.tweets)

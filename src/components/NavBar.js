@@ -2,17 +2,19 @@ import React from 'react';
 
 const NavBar = (props) => {
   return(
-    <div>
-      <div className="ui secondary pointing menu">
-        <a href="http://localhost:3001/" className="active item">
-          Home
-        </a>
-        <div className="right menu">
-          <a className="ui item">
-            Logout
-          </a>
-        </div>
+    <div className="ui inverted menu">
+      <div className="header item">
+        <a href="http://localhost:3001/"> Home </a>
       </div>
+      <a className="item">
+        About Us
+      </a>
+      <a className="item">
+        Jobs
+      </a>
+      <a className="item">
+        Locations
+      </a>
     </div>
   )
 }

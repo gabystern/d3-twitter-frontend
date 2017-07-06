@@ -8,3 +8,8 @@
   padding: 14px;
   text-align: center;
 }
+
+g.path {
+    fill: "blue";
+    stroke-width: 1px;
+}
