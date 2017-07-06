@@ -94,8 +94,11 @@ export default class ScatterPlot extends Component {
     let g = svg.append("svg:g");
 
     let div = d3.select("body").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+    console.log(this.props.tweets[0])
+    let options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: "2-digit" };
 
     g.selectAll("scatter-dots")
       .data(this.props.tweets)
@@ -108,9 +111,9 @@ export default class ScatterPlot extends Component {
           } else if (d.retweet_count > 10) {
             return 'darkturquoise'
           } else if (d.retweet_count >= 4) {
-            return 'palegreen'
+            return 'mediumblue'
           } else if (d.retweet_count < 4) {
-            return 'paleturquoise'
+            return 'royalblue'
           }
         })
         .style("opacity", 0.8)
@@ -123,13 +126,19 @@ export default class ScatterPlot extends Component {
           return y(d.retweet_count)
         })
         .attr("r", function(d){
-          return (d.retweet_count*2)
+          if (d.retweet_count > 400){
+            return d.retweet_count*0.25
+          } else if (d.retweet_count > 200){
+            return d.retweet_count*0.5
+          } else {
+            return (d.retweet_count*1.5)
+          }
         })
         .on("mouseover", function(d) {
          div.transition()
            .duration(200)
            .style("opacity", .9);
-         div.html(new Date(Date.parse(d.tweet_created_at)) + "<br/>" + d.username + "<br/>" + d.content)
+         div.html("<strong>"+d.username+"</strong>" + "<br/>" + new Date(d.tweet_created_at).toLocaleString('en-US', options) + "<br/>" + d.content)
            .style("left", (d3.event.pageX) + "px")
            .style("top", (d3.event.pageY) + "px");
          })

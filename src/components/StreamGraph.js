@@ -4,6 +4,7 @@ import { scaleLinear } from 'd3-scale';
 import { select } from 'd3-selection';
 import { stack, area } from 'd3-shape'
 import { color } from 'd3';
+import { tip } from 'd3-tip'
 
 
 export default class StreamGraph extends Component {
@@ -25,8 +26,6 @@ export default class StreamGraph extends Component {
     this.createSvg = this.createSvg.bind(this)
 
     this.pendingRender = this.pendingRender.bind(this)
-    this.createArea = this.createArea.bind(this)
-    this.nest = this.nest.bind(this)
   }
 
   createSvg(){
@@ -65,6 +64,8 @@ export default class StreamGraph extends Component {
       .domain([min, max])
       .range([0, 1000])
 
+    // let z = d3.scaleOrdinal(d3.schemeCategory10);
+    var color = d3.scaleOrdinal(d3.schemeDark2);
 
     svg.append("text")
       .attr("x", 640 / 2 )
@@ -87,41 +88,26 @@ export default class StreamGraph extends Component {
     svg.append("g")
       .call(d3.axisLeft(y));
 
-    let g = svg.append("svg:g");
-
-    this.nest(x, y, svg)
-
-  }
-
-  nest(x, y, svg){
-    let origNest = d3.nest()
-      .key(function(d) { return d.sentiment })
-      .entries(this.props.tweets)
-    //array of negative scores
     let layers = this.props.tweets.map(function(tweet){
       if (tweet.sentiment === "positive"){
         let parsedDate = new Date(Date.parse(tweet.tweet_created_at))
-        return {positive: tweet.sentiment_score, negative: 0, neutral: 0, date: parsedDate, totalVal: tweet.sentiment_score}
+        return {positive: tweet.sentiment_score, negative: 0, neutral: 0, date: parsedDate, totalVal: tweet.sentiment_score, sentiment: "positive"}
       } else if (tweet.sentiment === "negative"){
         let parsedDate = new Date(Date.parse(tweet.tweet_created_at))
-        return {positive: 0, negative: tweet.sentiment_score, neutral: 0, date: parsedDate, totalVal: tweet.sentiment_score}
+        return {positive: 0, negative: tweet.sentiment_score, neutral: 0, date: parsedDate, totalVal: tweet.sentiment_score, sentiment: "negative"}
       } else {
         let parsedDate = new Date(Date.parse(tweet.tweet_created_at))
-        return {positive: 0, negative: 0, neutral: tweet.sentiment_score, date: parsedDate, totalVal: tweet.sentiment_score}
+        return {positive: 0, negative: 0, neutral: tweet.sentiment_score, date: parsedDate, totalVal: tweet.sentiment_score, sentiment: "neutral"}
       }
     })
 
-
-    this.createArea(x, y, svg, layers)
-  }
-
-  createArea(x, y, svg, layers){
+    let g = svg.append("svg:g");
 
     let stack = d3.stack().keys(["negative", "positive", "neutral"])
     var series = stack(layers)
     console.log(series)
-    var color = d3.scaleLinear()
-      .range(["#aad", "#556"]);
+    var color = d3.scaleOrdinal(d3.schemeAccent);
+    var z = d3.scaleSequential(d3.interpolateViridis);
 
     var area = d3.area()
       .x(function(d) {return x(d.data.date) })
@@ -129,14 +115,29 @@ export default class StreamGraph extends Component {
       .y0(y(0))
       .curve(d3.curveBasis);
 
-    svg.selectAll("path")
+// for mouseover functionality
+    // let div = d3.select("body").append("div")
+    //   .attr("class", "tooltip")
+    //   .style("opacity", 0);
+
+    g.selectAll("path")
        .data(series)
        .enter().append("path")
        .attr("d", area)
-       .style("fill", function() { return color(Math.random()); });
+       .classed("test", true)
+       .style("fill", "turquoise")
+// working on colors
+    //  var setColor = d3.scaleLinear()
+    //   .range(["#51D0D7", "#31B5BB"]);
+     //
+    //  let paths = document.getElementsByClassName('layer')
+    //  var colors = Object.keys(paths).forEach(function(key) {
+    //     return paths[key].style.fill = setColor(Math.random())
+    //  })
+    //  debugger
 
   }
-  
+
   componentDidUpdate(prevProps){
     if (prevProps.tweets.length !== 0 && this.props.tweets !== prevProps.tweets) {
       let root = document.getElementById('root')

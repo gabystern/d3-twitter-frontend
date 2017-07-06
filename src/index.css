@@ -8,3 +8,49 @@
   padding: 14px;
   text-align: center;
 }
+
+.ui.huge.header {
+  padding: 20px;
+  font-size: 3em;
+}
+
+.ui.large.header {
+  font-size: 2.2em;
+}
+
+.row.content {
+  height: 500px;
+}
+
+p {
+  font-size: 16px;
+}
+
+form.ui.form {
+  margin-left: 10px;
+}
+
+#chart {
+  display: block;
+  margin: auto;
+  width: 100%;
+  align-items: center;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: left;
+    width: 400px;
+    height: 40px;
+    padding: 2px;
+    font: 12px sans-serif;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.line {
+  fill: none;
+  stroke: url(#line-gradient);
+  stroke-width: 2px;
+}
