@@ -64,7 +64,8 @@ export default class StreamGraph extends Component {
       .domain([min, max])
       .range([0, 1000])
 
-    let z = d3.scaleOrdinal(d3.schemeCategory10);
+    // let z = d3.scaleOrdinal(d3.schemeCategory10);
+    var color = d3.scaleOrdinal(d3.schemeDark2);
 
     svg.append("text")
       .attr("x", 640 / 2 )
@@ -105,8 +106,8 @@ export default class StreamGraph extends Component {
     let stack = d3.stack().keys(["negative", "positive", "neutral"])
     var series = stack(layers)
     console.log(series)
-    var color = d3.scaleLinear()
-      .range(["#aad", "#556"]);
+    var color = d3.scaleOrdinal(d3.schemeAccent);
+    var z = d3.scaleSequential(d3.interpolateViridis);
 
     var area = d3.area()
       .x(function(d) {return x(d.data.date) })
@@ -123,14 +124,8 @@ export default class StreamGraph extends Component {
        .data(series)
        .enter().append("path")
        .attr("d", area)
-
-    g.selectAll(".layer")
-     .data(layers)
-     .enter().append("path")
-     .attr("class", "layer")
-     .attr("d", function(d) { return area(d.totalVal)})
-     .style("fill", function(d, i) { return z(i) });
-
+       .classed("test", true)
+       .style("fill", "turquoise")
 // working on colors
     //  var setColor = d3.scaleLinear()
     //   .range(["#51D0D7", "#31B5BB"]);

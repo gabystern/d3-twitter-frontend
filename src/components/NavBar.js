@@ -6,14 +6,8 @@ const NavBar = (props) => {
       <div className="header item">
         <a href="http://localhost:3001/"> Home </a>
       </div>
-      <a className="item">
-        About Us
-      </a>
-      <a className="item">
-        Jobs
-      </a>
-      <a className="item">
-        Locations
+      <a className="item right align">
+        Log In
       </a>
     </div>
   )

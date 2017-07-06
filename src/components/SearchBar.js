@@ -2,15 +2,12 @@ import React from 'react';
 
 const SearchBar = (props) => {
   return(
-    <div>
-    <input
-            type="text"
-            value={props.searchTerm}
-            onChange={props.handleChange}
-            placeholder={"Enter a hashtag"}
-          />
-    <input type="button" onClick={props.handleClick} className="button" />
-    </div>
+    <form className="ui form">
+      <div className="six wide field center aligned">
+        <input type="text" value={props.searchTerm} onChange={props.handleChange} placeholder="Enter a hashtag" />
+      </div>
+      <button className="ui button" onClick={props.handleClick} type="button">Submit</button>
+    </form>
   )
 }
 
