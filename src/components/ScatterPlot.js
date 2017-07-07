@@ -7,9 +7,6 @@ export default class ScatterPlot extends Component {
 
   constructor(props){
     super(props)
-    this.state = {
-      load: true
-    }
     this.data = this.props.tweets
 
     this.margin = {
@@ -109,11 +106,11 @@ export default class ScatterPlot extends Component {
           if (d.retweet_count > 30){
             return 'red'
           } else if (d.retweet_count > 10) {
-            return 'darkturquoise'
+            return '1BAECF'
           } else if (d.retweet_count >= 4) {
-            return 'mediumblue'
+            return 'FF5700'
           } else if (d.retweet_count < 4) {
-            return 'royalblue'
+            return 'E892CA'
           }
         })
         .style("opacity", 0.8)
@@ -157,12 +154,6 @@ export default class ScatterPlot extends Component {
     this.createSvg()
   }
 
-  componentWillReceiveProps(prevProps){
-    this.setState({
-      load: true
-    })
-  }
-
   componentDidUpdate(prevProps){
     if (prevProps.tweets.length !== 0 && this.props.tweets !== prevProps.tweets) {
       let root = document.getElementById('root')
@@ -170,9 +161,6 @@ export default class ScatterPlot extends Component {
       chart.parentNode.removeChild(chart)
       this.createSvg()
       this.plot(d3.select(".display"), this.props.tweets)
-      this.setState({
-        load: false
-      })
     }
   }
 
@@ -183,14 +171,11 @@ export default class ScatterPlot extends Component {
 
   render(){
     this.pendingRender()
-      if (this.props.loader === false) {
-        return ( <p>Loading...</p> )
-      } else {
         return (
           <div>
+
           </div>
         )
-      }
   }
 
 

@@ -5,6 +5,7 @@ import StreamGraph from '../components/StreamGraph'
 import SearchBar from '../components/SearchBar'
 import HomePage from '../components/HomePage'
 import NavBar from '../components/NavBar'
+import StreamCalculations from '../components/StreamCalculations'
 import { Route, Switch } from 'react-router-dom'
 
 class AccountsContainer extends Component {
@@ -15,7 +16,7 @@ class AccountsContainer extends Component {
       charts: [],
       tweets: [],
       searchTerm: "",
-      loader: true
+      loader: false
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -34,7 +35,15 @@ class AccountsContainer extends Component {
     })
   }
 
+  startLoader(){
+    this.setState({
+      loader: true
+    })
+  }
+
   handleClick() {
+    this.startLoader()
+
     fetch('http://localhost:3000/api/v1/tweets', {
       method: 'POST',
       headers: {
@@ -48,26 +57,39 @@ class AccountsContainer extends Component {
     .then(resp => resp.json() )
     .then(tweets => this.setState({
             tweets: tweets,
-            loader: true
+            loader: false
           }))
   }
 
 
   render() {
-    return (
-      <div>
-        < NavBar />
-        <Switch>
-          <Route exact path ='/' render={() => < WelcomePage /> } />
-          <Route exact path ='/home' render={() => < HomePage /> } />
-          <Route exact path="/scatterplot" render={()=> <div>< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> </div>} />
-          <Route exact path="/streamgraph" render={()=> <div>< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} /> </div>} />
-        </Switch>
-      </div>
-    )
+    if (this.state.loader === true){
+      return (
+        <div id='nav-search'>
+          < NavBar />
+          <Switch>
+            <Route exact path ='/' render={() => < WelcomePage /> } />
+            <Route exact path ='/home' render={() => < HomePage /> } />
+            <Route exact path="/scatterplot" render={()=> <div className="test">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> </div>} />
+            <Route exact path="/streamgraph" render={()=> <div className="test">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} />  </div>} />
+          </Switch>
+            <img className="loader" src="../assets/Loader.gif" />
+        </div>
+      )
+    } else {
+      return (
+        <div id="nav-search">
+          < NavBar />
+          <Switch>
+            <Route exact path ='/' render={() => < WelcomePage /> } />
+            <Route exact path ='/home' render={() => < HomePage /> } />
+            <Route exact path="/scatterplot" render={()=> <div className="test">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> </div>} />
+            <Route exact path="/streamgraph" render={()=> <div className="test">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} /> < StreamCalculations tweets={this.state.tweets} /> </div>} />
+          </Switch>
+        </div>
+      )
   }
-
-
+}
 }
 
 export default AccountsContainer;

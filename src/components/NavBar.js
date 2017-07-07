@@ -6,7 +6,7 @@ const NavBar = (props) => {
       <div className="header item">
         <a href="http://localhost:3001/"> Home </a>
       </div>
-      <a className="item right align">
+      <a className="item right align" href="http://localhost:3001/home">
         Log In
       </a>
     </div>
