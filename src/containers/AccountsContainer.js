@@ -9,7 +9,7 @@ import StreamCalculations from '../components/StreamCalculations'
 import { Route, Switch } from 'react-router-dom'
 
 const tweetsDevURL = 'https://localhost:3000/api/v1/tweets'
-const tweetsProdURL = 'https://twending-api.herokuapp.com/api/v1/twitter'
+const tweetsProdURL = 'https://twending-api.herokuapp.com/api/v1/tweets'
 
 const chartsDevURL = 'https://localhost:3000/api/v1/charts'
 const chartsProdURL = 'https://twending-api.herokuapp.com/api/v1/charts'
