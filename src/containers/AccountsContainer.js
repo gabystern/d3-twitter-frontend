@@ -50,7 +50,7 @@ class AccountsContainer extends Component {
   handleClick() {
     this.startLoader()
 
-    fetch(tweetsDevURL, {
+    fetch(tweetsProdURL, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
