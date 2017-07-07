@@ -20,7 +20,7 @@ const HomePage = (props) => {
               <div className="ui fluid image">
                 <img className="image" src="../assets/ScatterPlot2.png"/>
                 <div className="middle">
-                  <a href="http://localhost:3001/scatterplot" className="text">Create a Graph</a>
+                  <a href="http://localhost:3000/scatterplot" className="text">Create a Graph</a>
                 </div>
               </div>
             </div>
