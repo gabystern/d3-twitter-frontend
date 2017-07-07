@@ -14,7 +14,7 @@ const ChartCard = (props) => {
             </div>
           </div><img src="http://www.brain-map.org/api/examples/examples/images/scatter.png"/></div>
         <div className="content">
-          <a href="http://localhost:3001/scatterplot" className="header">{props.name}</a>
+          <a href="https://twending-client.herokuapp.com/scatterplot" className="header">{props.name}</a>
         </div>
       </div>
     </div>

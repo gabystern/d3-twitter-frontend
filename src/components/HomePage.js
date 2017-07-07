@@ -20,7 +20,7 @@ const HomePage = (props) => {
               <div className="ui fluid image">
                 <img className="image" src="../assets/ScatterPlot2.png"/>
                 <div className="middle">
-                  <a href="http://localhost:3000/scatterplot" className="text">Create a Graph</a>
+                  <a href="https://twending-client.herokuapp.com/scatterplot" className="text">Create a Graph</a>
                 </div>
               </div>
             </div>
@@ -35,7 +35,7 @@ const HomePage = (props) => {
               <div className="ui fluid image">
                 <img className="image" src="../assets/StreamGraph1.png"/>
                 <div className="middle">
-                  <a href="http://localhost:3001/streamgraph" className="text">Create a Graph</a>
+                  <a href="https://twending-client.herokuapp.com/streamgraph" className="text">Create a Graph</a>
                 </div>
               </div>
             </div>

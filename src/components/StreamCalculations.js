@@ -6,9 +6,6 @@ export default class StreamCalculations extends Component {
       super(props)
     }
 
-  AvgSentiment(){
-  }
-
   render(){
     let counter = 0
     this.props.tweets.forEach((tweet) => {
