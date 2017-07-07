@@ -8,6 +8,12 @@ import NavBar from '../components/NavBar'
 import StreamCalculations from '../components/StreamCalculations'
 import { Route, Switch } from 'react-router-dom'
 
+const tweetsDevURL = 'https://localhost:3000/api/v1/tweets'
+const tweetsProdURL = 'https://twending-api.herokuapp.com/api/v1/twitter'
+
+const chartsDevURL = 'https://localhost:3000/api/v1/charts'
+const chartsProdURL = 'https://twending-api.herokuapp.com/api/v1/charts'
+
 class AccountsContainer extends Component {
 
   constructor(){
@@ -23,7 +29,7 @@ class AccountsContainer extends Component {
   }
 
   componentDidMount(){
-    fetch('http://localhost:3000/api/v1/charts')
+    fetch(chartsProdURL)
     .then(resp => resp.json())
     .then(charts => { this.setState({ charts })})
   }
@@ -44,7 +50,7 @@ class AccountsContainer extends Component {
   handleClick() {
     this.startLoader()
 
-    fetch('http://localhost:3000/api/v1/tweets', {
+    fetch(tweetsDevURL, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
