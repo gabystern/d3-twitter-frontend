@@ -115,27 +115,12 @@ export default class StreamGraph extends Component {
       .y0(y(0))
       .curve(d3.curveBasis);
 
-// for mouseover functionality
-    // let div = d3.select("body").append("div")
-    //   .attr("class", "tooltip")
-    //   .style("opacity", 0);
-
     g.selectAll("path")
        .data(series)
        .enter().append("path")
        .attr("d", area)
        .classed("test", true)
-       .style("fill", "turquoise")
-// working on colors
-    //  var setColor = d3.scaleLinear()
-    //   .range(["#51D0D7", "#31B5BB"]);
-     //
-    //  let paths = document.getElementsByClassName('layer')
-    //  var colors = Object.keys(paths).forEach(function(key) {
-    //     return paths[key].style.fill = setColor(Math.random())
-    //  })
-    //  debugger
-
+       .style("fill", "1BAECF")
   }
 
   componentDidUpdate(prevProps){
@@ -162,11 +147,9 @@ export default class StreamGraph extends Component {
 
   render(){
     this.pendingRender()
-
-    return (
-      <div>
-      </div>
-    )
+      return (
+        <div></div>
+      )
   }
 
 

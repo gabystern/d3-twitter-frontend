@@ -5,14 +5,20 @@ const HomePage = (props) => {
   mixins: [Carousel.ControllerMixin]
 
   return (
-    <Carousel>
-          <img src="http://placehold.it/1000x400/ffffff/c0392b/&text=slide1"/>
-          <img src="http://placehold.it/1000x400/ffffff/c0392b/&text=slide2"/>
-          <img src="http://placehold.it/1000x400/ffffff/c0392b/&text=slide3"/>
-          <img src="http://placehold.it/1000x400/ffffff/c0392b/&text=slide4"/>
-          <img src="http://placehold.it/1000x400/ffffff/c0392b/&text=slide5"/>
-          <img src="http://placehold.it/1000x400/ffffff/c0392b/&text=slide6"/>
-    </Carousel>
+    <div className="welcome">
+    <div className="ui grid container">
+      <Carousel>
+            <img src="../assets/ScatterPlot1.png"/>
+            <img src="../assets/ScatterPlot2.png"/>
+            <img src="../assets/StreamGraph1.png"/>
+            <img src="../assets/ScatterPlot3.png"/>
+            <img src="../assets/StreamGraph2.png"/>
+      </Carousel>
+      <button className="ui button" id="welcome">
+        Sign Up
+      </button>
+      </div>
+    </div>
   )
 
 }

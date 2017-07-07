@@ -52,5 +52,97 @@ div.tooltip {
 .line {
   fill: none;
   stroke: url(#line-gradient);
-  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
+
+#welcome {
+  display: block;
+  margin: auto;
+}
+
+.ui.image.stream {
+  height: 200px;
+}
+
+.ui.image.scatter {
+  height: 180px;
+}
+
+.ui.fluid.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.ui.basic.segment:hover img.image {
+  opacity: 0.3;
+}
+.ui.basic.segment:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #4169E1;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+.loader {
+  display: block;
+  margin: auto;
+  transition: .5s ease;
+}
+
+svg#chart {
+  z-index: -1;
+  transition: width 2s;
+}
+
+#nav-search {
+  height: 200px;
+}
+
+.home {
+  background-image: url("./background2.001.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100%
+}
+
+div.test {
+  margin: auto;
+  display: block;
+  text-align: center;
+  align-items: center;
+  background-image: url("./SearchBackground.jpeg");
+  background-size:100%;
+  background-repeat: no-repeat;
+}
+
+.ui.form.hashtag-search{
+  padding: 5px;
+}
+
+div.ui.sizer.vertical.segment {
+  background: #FFF;
+  opacity: .75;
+}
+
+.welcome {
+  background-image: url("./background2.001.jpeg");
+  background-repeat: no-repeat;
+  opacity: 0.98;
 }
