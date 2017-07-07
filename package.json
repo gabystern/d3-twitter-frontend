@@ -10,6 +10,7 @@
     "d3-time": "^1.0.7",
     "d3-time-format": "^2.0.5",
     "d3-tip": "^0.7.1",
+    "nuka-carousel": "^2.0.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.1"
