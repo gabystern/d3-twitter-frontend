@@ -17,7 +17,7 @@ export default class ScatterPlot extends Component {
     };
     this.width = this.w - this.margin.left - this.margin.right;
     this.w = 800;
-    this.h = 500;
+    this.h = 400;
     this.height = this.h - this.margin.top - this.margin.bottom;
     this.createSvg = this.createSvg.bind(this)
 
@@ -38,7 +38,8 @@ export default class ScatterPlot extends Component {
 
     let chart = svg.append("g")
       .classed("display", true)
-      .attr("transform", "translate(" + 80 + "," + 60 + ")");
+      .attr("transform", "translate(" + 80 + "," + 60 + ")")
+      .attr("xmlns", "http://www.w3.org/2000/svg");
   }
 
   plot = (svg, tweets) => {
@@ -53,11 +54,11 @@ export default class ScatterPlot extends Component {
 
     let retweets = this.props.tweets.map(function(d){
       return d.retweet_count
-    })
+    });
 
     let retweetColor = d3.nest()
       .key(function(d) { return d.retweet_count; })
-      .entries(this.props.tweets)
+      .entries(this.props.tweets);
 
     let y = d3.scaleLinear()
       .domain([-0.1, d3.max(retweets)+1])
@@ -65,11 +66,12 @@ export default class ScatterPlot extends Component {
 
     let x = d3.scaleTime()
       .domain([min, max])
-      .range([0, 1000])
+      .range([0, 1000]);
 
     svg.append("text")
       .attr("x", 640 / 2 )
       .attr("y",  this.height + this.margin.top + 20)
+      .attr("dy", "1em")
       .style("text-anchor", "middle")
       .text("Date");
 
@@ -83,6 +85,7 @@ export default class ScatterPlot extends Component {
 
     svg.append("g")
       .attr("transform", "translate(0," + this.height + ")")
+      .classed("smallchart", true)
       .call(d3.axisBottom(x));
 
     svg.append("g")
@@ -94,7 +97,6 @@ export default class ScatterPlot extends Component {
       .attr("class", "tooltip")
       .style("opacity", 0);
 
-    console.log(this.props.tweets[0])
     let options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: "2-digit" };
 
     g.selectAll("scatter-dots")
@@ -110,7 +112,7 @@ export default class ScatterPlot extends Component {
           } else if (d.retweet_count >= 4) {
             return 'FF5700'
           } else if (d.retweet_count < 4) {
-            return 'E892CA'
+            return 'white'
           }
         })
         .style("opacity", 0.8)
@@ -143,8 +145,9 @@ export default class ScatterPlot extends Component {
          div.transition()
            .duration(500)
            .style("opacity", 0);
-         });
-      }
+         })
+
+  }
 
   shouldComponentUpdate(nextProps){
     return this.props.tweets !== nextProps.tweets

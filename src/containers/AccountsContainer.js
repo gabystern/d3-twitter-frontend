@@ -5,8 +5,10 @@ import StreamGraph from '../components/StreamGraph'
 import SearchBar from '../components/SearchBar'
 import HomePage from '../components/HomePage'
 import NavBar from '../components/NavBar'
+import DownloadButton from '../components/DownloadButton'
 import StreamCalculations from '../components/StreamCalculations'
 import { Route, Switch } from 'react-router-dom'
+import { saveSvgAsPng } from 'save-svg-as-png'
 
 const tweetsDevURL = 'https://localhost:3000/api/v1/tweets'
 const tweetsProdURL = 'https://twending-api.herokuapp.com/api/v1/tweets'
@@ -67,30 +69,36 @@ class AccountsContainer extends Component {
           }))
   }
 
+  handleClickDownload(){
+    let element = document.getElementById('chart')
+    debugger
+    saveSvgAsPng(element, "scatterplot.png", {width: 1430});
+  }
+
 
   render() {
     if (this.state.loader === true){
       return (
-        <div id='nav-search'>
+        <div>
           < NavBar />
           <Switch>
             <Route exact path ='/' render={() => < WelcomePage /> } />
-            <Route exact path ='/home' render={() => < HomePage /> } />
-            <Route exact path="/scatterplot" render={()=> <div className="test">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> </div>} />
-            <Route exact path="/streamgraph" render={()=> <div className="test">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} />  </div>} />
+            <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
+            <Route exact path="/scatterplot" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> </div>} />
+            <Route exact path="/streamgraph" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} />  </div>} />
           </Switch>
-            <img className="loader" src="../assets/Loader.gif" />
-        </div>
+          <img className="loader" src="../assets/LoaderSmall.gif" />
+          </div>
       )
     } else {
       return (
-        <div id="nav-search">
+        <div>
           < NavBar />
           <Switch>
             <Route exact path ='/' render={() => < WelcomePage /> } />
-            <Route exact path ='/home' render={() => < HomePage /> } />
-            <Route exact path="/scatterplot" render={()=> <div className="test">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> </div>} />
-            <Route exact path="/streamgraph" render={()=> <div className="test">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} /> < StreamCalculations tweets={this.state.tweets} /> </div>} />
+            <Route exact path ='/home' render={() => <body className="welcome-body">< HomePage /></body> } />
+            <Route exact path="/scatterplot" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> < DownloadButton handleClick={this.handleClickDownload} /> </div>} />
+            <Route exact path="/streamgraph" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} /> < StreamCalculations tweets={this.state.tweets} /> < DownloadButton handleClick={this.handleClickDownload} /> </div>} />
           </Switch>
         </div>
       )
