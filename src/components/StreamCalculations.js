@@ -27,8 +27,8 @@ export default class StreamCalculations extends Component {
 
     {if (this.props.tweets.length > 0){
       return (
-        <div className="ui segment">
-        <div className="ui statistic">
+        <div className="ui segment stats">
+        <div className="ui mini statistic">
           <div className="value">
             {sentiment}
           </div>

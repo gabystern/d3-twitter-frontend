@@ -21,7 +21,7 @@ export default class StreamGraph extends Component {
     };
     this.width = this.w - this.margin.left - this.margin.right;
     this.w = 800;
-    this.h = 500;
+    this.h = 400;
     this.height = this.h - this.margin.top - this.margin.bottom;
     this.createSvg = this.createSvg.bind(this)
 

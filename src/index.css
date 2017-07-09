@@ -16,6 +16,7 @@
 
 .ui.large.header {
   font-size: 2.2em;
+  position: relative;
 }
 
 .row.content {
@@ -27,14 +28,15 @@ p {
 }
 
 form.ui.form {
-  margin-left: 10px;
+  margin-left: 400px;
 }
 
 #chart {
   display: block;
-  margin: auto;
-  width: 100%;
+  width: 1400px;
   align-items: center;
+  margin-left: 75px;
+  margin-right: auto;
 }
 
 div.tooltip {
@@ -102,47 +104,75 @@ div.tooltip {
 }
 
 .loader {
-  display: block;
-  margin: auto;
   transition: .5s ease;
+  z-index: 1;
+  padding-left: 675px;
+  padding-right: auto;
 }
 
-svg#chart {
+g.display {
   z-index: -1;
   transition: width 2s;
+  background: #ffff;
+  height: 100%
 }
 
-#nav-search {
-  height: 200px;
+input#search {
+  width: 390px;
 }
 
-.home {
-  background-image: url("./background2.001.jpeg");
+div.searchbar{
+  background-image: url("./search.001.jpeg");
   background-repeat: no-repeat;
-  background-size: 100%
+  background-size: cover;
+  height: 110px;
+  width: 500px;
+  margin-left: 450px;
+  border-radius: 15px;
 }
 
-div.test {
-  margin: auto;
-  display: block;
-  text-align: center;
-  align-items: center;
-  background-image: url("./scattersearch.001.jpeg");
-  background-size:100%;
-  background-repeat: no-repeat;
+body#home {
+  background-image: url("./background.001.jpeg");
+  background-size: cover;
+  height: 100vh;
 }
 
 .ui.form.hashtag-search{
   padding: 5px;
+  width: 400px;
+  margin-left: 45px;
+}
+
+div.box{
+  background: white;
+  opacity: 1;
+}
+
+div.ui.sizer.vertical.segment::before {
+  position: absolute;
+  z-index: -1;
 }
 
 div.ui.sizer.vertical.segment {
-  background: #9CF6F6;
-  opacity: .75;
+  background-color: white;
+  opacity: 0.88;
 }
 
 .welcome {
   background-image: url("./background2.001.jpeg");
   background-repeat: no-repeat;
   opacity: 0.98;
+}
+
+.ui.inverted.menu {
+  margin:0;
+}
+
+div.ui.segment.stats {
+  text-align: center;
+  height: 60px;
+}
+
+.graph-header {
+  padding: 10px;
 }
