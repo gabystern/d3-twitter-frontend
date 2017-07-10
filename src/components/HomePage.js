@@ -26,7 +26,6 @@ const HomePage = (props) => {
                 src='../assets/scatterplot1.png'
                 as='a' size='big'
                 href='https://twending-client.herokuapp.com/scatterplot'
-                target='_blank'
               />
             </Grid.Column>
             </div>
@@ -40,7 +39,6 @@ const HomePage = (props) => {
                 src='../assets/sentiment1.png'
                 as='a' size='big'
                 href='https://twending-client.herokuapp.com/streamgraph'
-                target='_blank'
               />
             </Grid.Column>
           </div>
