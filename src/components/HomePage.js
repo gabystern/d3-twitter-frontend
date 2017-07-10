@@ -18,14 +18,14 @@ const HomePage = (props) => {
         <Grid.Row className="graph-cards">
           <div className="columns">
             <Grid.Column className="graph-section">
-              <Header size='large' textAlign='center'>Tweet Frequency</Header>
+              <Header size='large' textAlign='center'>TwitterPlot</Header>
               <Segment basic size='large'>
                 See when people have tweeted about a certain event or topic as well as the most retweeted tweets.
               </Segment>
               <Image
                 src='../assets/scatterplot1.png'
                 as='a' size='big'
-                href='https://twending-client.herokuapp.com/scatterplot'
+                href='https://twending-client.herokuapp.com/twitterplot'
               />
             </Grid.Column>
             </div>
@@ -38,7 +38,7 @@ const HomePage = (props) => {
               <Image
                 src='../assets/sentiment1.png'
                 as='a' size='big'
-                href='https://twending-client.herokuapp.com/streamgraph'
+                href='https://twending-client.herokuapp.com/sentiment'
               />
             </Grid.Column>
           </div>
