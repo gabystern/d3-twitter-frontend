@@ -11,6 +11,6 @@ const HomePage = (props) => {
       <Segment basic size='huge' textAlign='center' id='welcome-text'>Visualize the #pulse of the world</Segment>
     </body>
   )
-
 }
+
 export default HomePage

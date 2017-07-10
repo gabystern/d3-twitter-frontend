@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {TweetsAdapter} from '../adapters'
 import WelcomePage from '../components/WelcomePage'
 import ScatterPlot from '../components/ScatterPlot'
 import StreamGraph from '../components/StreamGraph'
@@ -51,23 +52,13 @@ class AccountsContainer extends Component {
 
   handleClick() {
     this.startLoader()
-
-    fetch(tweetsProdURL, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'accept': 'application/json'
-      },
-      body: JSON.stringify({
-          search_term: this.state.searchTerm
-      })
-    })
-    .then(resp => resp.json() )
+    debugger
+    TweetsAdapter.fetchTweets(this.state.searchTerm)
     .then(tweets => this.setState({
             tweets: tweets,
             loader: false
           }))
-  }
+    }
 
   handleClickDownload(){
     let element = document.getElementById('chart')

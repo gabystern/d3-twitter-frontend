@@ -151,21 +151,6 @@ body#welcome-body{
   margin-left: 45px;
 }
 
-/*div.box{
-  background: white;
-  opacity: 1;
-}*/
-
-/*div.ui.sizer.vertical.segment::before {
-  position: absolute;
-  z-index: -1;
-}
-
-div.ui.sizer.vertical.segment {
-  background-color: white;
-  opacity: 0.88;
-}*/
-
 .welcome {
   background-image: url("./background2.001.jpeg");
   background-repeat: no-repeat;
@@ -205,7 +190,7 @@ div.ui.segment.stats {
 
 div.columns {
   background-color: white;
-  opacity: 0.8;
+  opacity: 0.85;
   margin:10px;
   width: 600px;
   height: 400px;
