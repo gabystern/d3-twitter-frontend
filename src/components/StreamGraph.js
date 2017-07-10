@@ -106,8 +106,6 @@ export default class StreamGraph extends Component {
     let stack = d3.stack().keys(["negative", "positive", "neutral"])
     var series = stack(layers)
     console.log(series)
-    var color = d3.scaleOrdinal(d3.schemeAccent);
-    var z = d3.scaleSequential(d3.interpolateViridis);
 
     var area = d3.area()
       .x(function(d) {return x(d.data.date) })
@@ -120,7 +118,24 @@ export default class StreamGraph extends Component {
        .enter().append("path")
        .attr("d", area)
        .classed("test", true)
-       .style("fill", "1BAECF")
+       .style("fill", this.sentimentColorFill())
+  }
+
+  sentimentColorFill(){
+    let counter = 0
+    this.props.tweets.forEach((tweet) => {
+      if (tweet.sentiment_score > 0.1 || tweet.sentiment_score < -0.1){
+        counter+=tweet.sentiment_score
+      }
+    })
+    let avg = counter/this.props.tweets.length
+    if (avg > 0.1){
+      return 'FF76FE'
+    } else if (avg < -0.1){
+      return 'FFDC62'
+    } else {
+      return '1BCDEB'
+    }
   }
 
   componentDidUpdate(prevProps){

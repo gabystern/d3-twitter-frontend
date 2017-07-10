@@ -106,13 +106,13 @@ export default class ScatterPlot extends Component {
         .classed("dot", true)
         .style("fill", function(d,i){
           if (d.retweet_count > 30){
-            return 'red'
+            return 'FF76FE'
           } else if (d.retweet_count > 10) {
-            return '1BAECF'
+            return '1BCDEB'
           } else if (d.retweet_count >= 4) {
-            return 'FF5700'
+            return 'FFDC62'
           } else if (d.retweet_count < 4) {
-            return 'white'
+            return '70FFF1'
           }
         })
         .style("opacity", 0.8)
@@ -130,7 +130,7 @@ export default class ScatterPlot extends Component {
           } else if (d.retweet_count > 200){
             return d.retweet_count*0.5
           } else {
-            return (d.retweet_count*1.5)
+            return (d.retweet_count*2)
           }
         })
         .on("mouseover", function(d) {
@@ -176,7 +176,6 @@ export default class ScatterPlot extends Component {
     this.pendingRender()
         return (
           <div>
-
           </div>
         )
   }

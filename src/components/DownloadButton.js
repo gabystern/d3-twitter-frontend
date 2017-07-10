@@ -1,9 +1,10 @@
 import React from 'react';
+import { Button } from 'semantic-ui-react'
 
 const DownloadButton = (props) => (
-  <button className="ui right floated button" id="download" onClick={props.handleClick}>
+  <Button floated='right' id="download"onClick={props.handleClick} >
     Download as PNG
-  </button>
+  </Button>
 )
 
 export default DownloadButton;
