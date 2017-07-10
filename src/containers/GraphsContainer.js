@@ -17,7 +17,7 @@ const tweetsProdURL = 'https://twending-api.herokuapp.com/api/v1/tweets'
 const chartsDevURL = 'https://localhost:3000/api/v1/charts'
 const chartsProdURL = 'https://twending-api.herokuapp.com/api/v1/charts'
 
-class AccountsContainer extends Component {
+class GraphsContainer extends Component {
 
   constructor(){
     super()
@@ -97,4 +97,4 @@ class AccountsContainer extends Component {
 }
 }
 
-export default AccountsContainer;
+export default GraphsContainer;
