@@ -33,7 +33,7 @@ form.ui.form.searchbar {
   background-size: cover;
   height: 110px;
   width: 500px;
-  margin-left: 450px;
+  margin-left: 700px;
   border-radius: 15px;
 }
 
@@ -41,8 +41,9 @@ form.ui.form.searchbar {
   display: block;
   width: 1400px;
   align-items: center;
-  margin-left: 75px;
+  margin-left: 275px;
   margin-right: auto;
+  margin-top: 50px;
 }
 
 div.tooltip {
@@ -112,7 +113,7 @@ div.tooltip {
 .loader {
   transition: .5s ease;
   z-index: 1;
-  padding-left: 675px;
+  padding-left: 950px;
   padding-right: auto;
 }
 
@@ -171,7 +172,8 @@ div.ui.segment.stats {
 }
 
 #download {
-  margin-right: 175px;
+  margin-right: 300px;
+  margin-top: 10px;
 }
 
 .slick-list{
@@ -202,4 +204,13 @@ div.ui.huge.center.aligned.header.graphs-header{
 
 div.ui.large.center.aligned.header {
   margin-top: 30px;
+}
+
+a.ui.button {
+  margin-left: 900px;
+  margin-right: auto;
+}
+
+.slick-track {
+  margin-left: 200px;
 }

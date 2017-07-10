@@ -52,7 +52,7 @@ class GraphsContainer extends Component {
 
   handleClick() {
     this.startLoader()
-    debugger
+
     TweetsAdapter.fetchTweets(this.state.searchTerm)
     .then(tweets => this.setState({
             tweets: tweets,
@@ -62,7 +62,6 @@ class GraphsContainer extends Component {
 
   handleClickDownload(){
     let element = document.getElementById('chart')
-    debugger
     saveSvgAsPng(element, "graph.png", {width: 1430});
   }
 
@@ -79,7 +78,19 @@ class GraphsContainer extends Component {
             <Route exact path="/sentiment" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} />  </div>} />
           </Switch>
           <img className="loader" src="../assets/LoaderSmall.gif" />
-          </div>
+        </div>
+      )
+    } else if (this.state.tweets.length === 0) {
+      return (
+        <div>
+          < NavBar />
+          <Switch>
+            <Route exact path ='/' render={() => < WelcomePage /> } />
+            <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
+            <Route exact path="/twitterplot" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> </div>} />
+            <Route exact path="/sentiment" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} /> < StreamCalculations tweets={this.state.tweets} /> </div>} />
+          </Switch>
+        </div>
       )
     } else {
       return (
@@ -89,7 +100,7 @@ class GraphsContainer extends Component {
             <Route exact path ='/' render={() => < WelcomePage /> } />
             <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
             <Route exact path="/twitterplot" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/><br/>< DownloadButton handleClick={this.handleClickDownload} /> </div>} />
-            <Route exact path="/sentiment" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} /> < StreamCalculations tweets={this.state.tweets} /> < DownloadButton handleClick={this.handleClickDownload} /> </div>} />
+            <Route exact path="/sentiment" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} /> < StreamCalculations tweets={this.state.tweets} /><br/> < DownloadButton handleClick={this.handleClickDownload} /> </div>} />
           </Switch>
         </div>
       )

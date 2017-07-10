@@ -43,7 +43,7 @@ export default class ScatterPlot extends Component {
   }
 
   plot = (svg, tweets) => {
-    debugger
+
     let parsedTimeArray = this.props.tweets.map(function(d){
       let epoch = Date.parse(d.tweet_created_at)
       let newDate = new Date(epoch)
