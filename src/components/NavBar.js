@@ -1,15 +1,12 @@
 import React from 'react';
+import { Menu } from 'semantic-ui-react'
 
 const NavBar = (props) => {
   return(
-    <div className="ui inverted menu">
-      <div className="header item">
-        <a href="https://twending-client.herokuapp.com/"> Home </a>
-      </div>
-      <a className="item right align" href="https://twending-client.herokuapp.com/home">
-        Log In
-      </a>
-    </div>
+    <Menu inverted>
+        <Menu.Item name='home' href="https://twending-client.herokuapp.com/home" />
+        <Menu.Item position='right' name='login' href="https://twending-client.herokuapp.com/home" />
+    </Menu>
   )
 }
 

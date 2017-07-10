@@ -72,7 +72,7 @@ class AccountsContainer extends Component {
   handleClickDownload(){
     let element = document.getElementById('chart')
     debugger
-    saveSvgAsPng(element, "scatterplot.png", {width: 1430});
+    saveSvgAsPng(element, "graph.png", {width: 1430});
   }
 
 
@@ -96,8 +96,8 @@ class AccountsContainer extends Component {
           < NavBar />
           <Switch>
             <Route exact path ='/' render={() => < WelcomePage /> } />
-            <Route exact path ='/home' render={() => <body className="welcome-body">< HomePage /></body> } />
-            <Route exact path="/scatterplot" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> < DownloadButton handleClick={this.handleClickDownload} /> </div>} />
+            <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
+            <Route exact path="/scatterplot" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/><br/>< DownloadButton handleClick={this.handleClickDownload} /> </div>} />
             <Route exact path="/streamgraph" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} /> < StreamCalculations tweets={this.state.tweets} /> < DownloadButton handleClick={this.handleClickDownload} /> </div>} />
           </Switch>
         </div>

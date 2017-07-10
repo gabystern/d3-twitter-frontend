@@ -27,8 +27,14 @@ p {
   font-size: 16px;
 }
 
-form.ui.form {
-  margin-left: 400px;
+form.ui.form.searchbar {
+  background-image: url("./search.001.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 110px;
+  width: 500px;
+  margin-left: 450px;
+  border-radius: 15px;
 }
 
 #chart {
@@ -119,20 +125,22 @@ g.display {
 
 input#search {
   width: 390px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
-div.searchbar{
-  background-image: url("./search.001.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 110px;
-  width: 500px;
-  margin-left: 450px;
-  border-radius: 15px;
+button#search {
+  margin-left: 10px;
 }
 
 body#home {
   background-image: url("./background.001.jpeg");
+  background-size: cover;
+  height: 100vh;
+}
+
+body#welcome-body{
+  background-color: #CAEBFF;
   background-size: cover;
   height: 100vh;
 }
@@ -143,12 +151,12 @@ body#home {
   margin-left: 45px;
 }
 
-div.box{
+/*div.box{
   background: white;
   opacity: 1;
-}
+}*/
 
-div.ui.sizer.vertical.segment::before {
+/*div.ui.sizer.vertical.segment::before {
   position: absolute;
   z-index: -1;
 }
@@ -156,7 +164,7 @@ div.ui.sizer.vertical.segment::before {
 div.ui.sizer.vertical.segment {
   background-color: white;
   opacity: 0.88;
-}
+}*/
 
 .welcome {
   background-image: url("./background2.001.jpeg");
@@ -175,4 +183,38 @@ div.ui.segment.stats {
 
 .graph-header {
   padding: 10px;
+}
+
+#download {
+  margin-right: 175px;
+}
+
+.slick-list{
+  background-color: #CAEBFF;
+  opacity: 0.7;
+}
+
+#welcome-header {
+  margin-top: 50px;
+  margin-bottom: -20px;
+}
+
+#welcome-text {
+  margin: 0px;
+}
+
+div.columns {
+  background-color: white;
+  opacity: 0.8;
+  margin:10px;
+  width: 600px;
+  height: 400px;
+}
+
+div.ui.huge.center.aligned.header.graphs-header{
+  margin-top:20px;
+}
+
+div.ui.large.center.aligned.header {
+  margin-top: 30px;
 }
