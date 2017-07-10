@@ -41,9 +41,9 @@ form.ui.form.searchbar {
   display: block;
   width: 1400px;
   align-items: center;
-  margin-left: 275px;
+  /*margin-left: 275px;
   margin-right: auto;
-  margin-top: 50px;
+  margin-top: 50px;*/
 }
 
 div.tooltip {

@@ -62,7 +62,7 @@ class GraphsContainer extends Component {
 
   handleClickDownload(){
     let element = document.getElementById('chart')
-    saveSvgAsPng(element, "graph.png", {width: 1430});
+    saveSvgAsPng(element, "graph.png", {width: 1400}, {height: 400});
   }
 
 

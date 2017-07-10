@@ -23,7 +23,7 @@ const HomePage = (props) => {
                 See when people have tweeted about a certain event or topic as well as the most retweeted tweets.
               </Segment>
               <Image
-                src='../assets/scatterplot1.png'
+                src='../assets/scatterplot_test.png'
                 as='a' size='big'
                 href='https://twending-client.herokuapp.com/twitterplot'
               />

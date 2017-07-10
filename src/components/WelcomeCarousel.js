@@ -11,7 +11,7 @@ class WelcomeCarousel extends Component {
     }
     return (
       <Slider {...settings}>
-        <div><img src="../assets/scatterplot1.png"/></div>
+        <div><img src="../assets/scatterplot_test.png"/></div>
         <div><img src="../assets/sentiment1.png"/></div>
         <div><img src="../assets/scatterplot2.png"/></div>
         <div><img src="../assets/sentiment2.png"/></div>
