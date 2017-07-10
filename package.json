@@ -17,6 +17,7 @@
     "react-router-dom": "^4.1.1",
     "react-slick": "^0.14.11",
     "save-svg-as-png": "^1.2.0",
+    "semantic-ui-react": "^0.71.0",
     "slick-carousel": "^1.6.0"
   },
   "devDependencies": {
