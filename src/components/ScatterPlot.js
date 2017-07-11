@@ -131,7 +131,7 @@ export default class ScatterPlot extends Component {
           } else if (d.retweet_count > 200){
             return d.retweet_count*0.5
           } else {
-            return (d.retweet_count*2)
+            return (d.retweet_count*2.5)
           }
         })
         .on("mouseover", function(d) {
