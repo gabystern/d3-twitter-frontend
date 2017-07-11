@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import { extent, nest, axisLeft, scale, scaleTime, style, event, select, scaleLinear, timeParse} from 'd3';
+import { nest, axisLeft, scale, scaleTime, style, event, select, scaleLinear, timeParse} from 'd3';
 import { tip } from 'd3-tip'
 
 export default class ScatterPlot extends Component {
@@ -32,6 +32,7 @@ export default class ScatterPlot extends Component {
         .attr("id", "chart")
         .attr("width", this.w)
         .attr("height", this.h)
+        .attr("align","center")
       .append("g")
         .attr("transform",
         "translate(" + this.margin.left + "," + this.margin.top + ")");

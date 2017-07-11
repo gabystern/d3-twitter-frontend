@@ -10,6 +10,7 @@ import DownloadButton from '../components/DownloadButton'
 import StreamCalculations from '../components/StreamCalculations'
 import { Route, Switch } from 'react-router-dom'
 import { saveSvgAsPng } from 'save-svg-as-png'
+import { Grid } from 'semantic-ui-react'
 
 const tweetsDevURL = 'https://localhost:3000/api/v1/tweets'
 const tweetsProdURL = 'https://twending-api.herokuapp.com/api/v1/tweets'
@@ -62,7 +63,7 @@ class GraphsContainer extends Component {
 
   handleClickDownload(){
     let element = document.getElementById('chart')
-    saveSvgAsPng(element, "graph.png", {width: 1400}, {height: 400});
+    saveSvgAsPng(element, "graph.png", {width: 1400});
   }
 
 
@@ -74,8 +75,16 @@ class GraphsContainer extends Component {
           <Switch>
             <Route exact path ='/' render={() => < WelcomePage /> } />
             <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
-            <Route exact path="/twitterplot" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> </div>} />
-            <Route exact path="/sentiment" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} />  </div>} />
+            <Route exact path="/twitterplot" render={()=>
+            <Grid container centered columns={1} className="graph-search">
+              < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
+              < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/>
+            </Grid>} />
+            <Route exact path="/sentiment" render={()=>
+              <Grid container centered columns={1} className="graph-search">
+                < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
+                < StreamGraph tweets={this.state.tweets} />
+              </Grid>} />
           </Switch>
           <img className="loader" src="../assets/LoaderSmall.gif" />
         </div>
@@ -87,8 +96,16 @@ class GraphsContainer extends Component {
           <Switch>
             <Route exact path ='/' render={() => < WelcomePage /> } />
             <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
-            <Route exact path="/twitterplot" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> </div>} />
-            <Route exact path="/sentiment" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} /> < StreamCalculations tweets={this.state.tweets} /> </div>} />
+            <Route exact path="/twitterplot" render={()=>
+              <Grid container centered columns={1} className="graph-search">
+              < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
+              < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> </Grid>} />
+            <Route exact path="/sentiment" render={()=>
+              <Grid container centered columns={1} className="graph-search">
+                < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
+                < StreamGraph tweets={this.state.tweets} />
+                < Grid.Row centered columns={1}><Grid.Column>< StreamCalculations tweets={this.state.tweets}/></Grid.Column></Grid.Row>
+              </Grid>} />
           </Switch>
         </div>
       )
@@ -99,8 +116,18 @@ class GraphsContainer extends Component {
           <Switch>
             <Route exact path ='/' render={() => < WelcomePage /> } />
             <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
-            <Route exact path="/twitterplot" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} /> < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/><br/>< DownloadButton handleClick={this.handleClickDownload} /> </div>} />
-            <Route exact path="/sentiment" render={()=> <div className="graph-header">< SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />< StreamGraph tweets={this.state.tweets} /> < StreamCalculations tweets={this.state.tweets} /><br/> < DownloadButton handleClick={this.handleClickDownload} /> </div>} />
+            <Route exact path="/twitterplot" render={()=>
+              <Grid container centered columns={1} className="graph-search">
+                < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
+                < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/><br/>
+                < Grid.Row centered columns={1}><Grid.Column>< DownloadButton handleClick={this.handleClickDownload}/></Grid.Column></Grid.Row>
+              </Grid>} />
+            <Route exact path="/sentiment" render={()=>
+              <Grid container centered columns={1} className="graph-search">
+                < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
+                < StreamGraph tweets={this.state.tweets} />
+                < Grid.Row centered columns={1}><Grid.Column>< StreamCalculations tweets={this.state.tweets}/>< DownloadButton handleClick={this.handleClickDownload} /> </Grid.Column></Grid.Row>
+              </Grid>} />
           </Switch>
         </div>
       )

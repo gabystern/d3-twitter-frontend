@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { scaleLinear } from 'd3-scale';
 import { select } from 'd3-selection';
 import { stack, area } from 'd3-shape'
-import { color } from 'd3';
+import { color, ease } from 'd3';
 import { tip } from 'd3-tip'
 
 
@@ -34,13 +34,14 @@ export default class StreamGraph extends Component {
         .attr("id", "chart")
         .attr("width", this.w)
         .attr("height", this.h)
+        .attr("align","center")
       .append("g")
         .attr("transform",
         "translate(" + this.margin.left + "," + this.margin.top + ")");
 
     let chart = svg.append("g")
       .classed("display", true)
-      .attr("transform", "translate(" + 80 + "," + 60 + ")");
+      .attr("transform", "translate(" + 80 + "," + 60 + ")")
   }
 
   plot = (svg) => {
@@ -63,9 +64,6 @@ export default class StreamGraph extends Component {
     let x = d3.scaleTime()
       .domain([min, max])
       .range([0, 1000])
-
-    // let z = d3.scaleOrdinal(d3.schemeCategory10);
-    var color = d3.scaleOrdinal(d3.schemeDark2);
 
     svg.append("text")
       .attr("x", 640 / 2 )
@@ -107,11 +105,17 @@ export default class StreamGraph extends Component {
     var series = stack(layers)
     console.log(series)
 
+    var ease = d3.easeCubic;
+
+    var startData = this.props.tweets.map(function(data) {
+        return 0;
+    });
+
     var area = d3.area()
       .x(function(d) {return x(d.data.date) })
       .y1(function(d) { return y(d.data.totalVal); })
       .y0(y(0))
-      .curve(d3.curveBasis);
+      .curve(d3.curveBasis)
 
     g.selectAll("path")
        .data(series)
@@ -119,6 +123,7 @@ export default class StreamGraph extends Component {
        .attr("d", area)
        .classed("test", true)
        .style("fill", this.sentimentColorFill())
+
   }
 
   sentimentColorFill(){
@@ -132,7 +137,7 @@ export default class StreamGraph extends Component {
     if (avg > 0.1){
       return 'FF76FE'
     } else if (avg < -0.1){
-      return 'FFDC62'
+      return 'F34C28'
     } else {
       return '1BCDEB'
     }
