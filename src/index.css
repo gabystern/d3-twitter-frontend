@@ -33,17 +33,14 @@ form.ui.form.searchbar {
   background-size: cover;
   height: 110px;
   width: 500px;
-  margin-left: 700px;
   border-radius: 15px;
 }
 
 #chart {
+  position: relative;
+  width: 1250px;
   display: block;
-  width: 1400px;
-  align-items: center;
-  /*margin-left: 275px;
-  margin-right: auto;
-  margin-top: 50px;*/
+  margin: auto;
 }
 
 div.tooltip {
@@ -103,18 +100,12 @@ div.tooltip {
   opacity: 1;
 }
 
-.text {
-  background-color: #4169E1;
-  color: white;
-  font-size: 16px;
-  padding: 16px 32px;
-}
-
 .loader {
   transition: .5s ease;
   z-index: 1;
   padding-left: 950px;
   padding-right: auto;
+  padding-top: 20px;
 }
 
 g.display {
@@ -167,12 +158,7 @@ div.ui.segment.stats {
   height: 60px;
 }
 
-.graph-header {
-  padding: 10px;
-}
-
 #download {
-  margin-right: 300px;
   margin-top: 10px;
 }
 
@@ -213,4 +199,12 @@ a.ui.button {
 
 .slick-track {
   margin-left: 200px;
+}
+
+div.ui.centered.container.one.column.grid.graph-search{
+  margin-top:10px;
+}
+
+p.sentiment-text {
+  padding-top: 50px;
 }
