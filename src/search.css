@@ -1,0 +1,24 @@
+form.ui.form.searchbar {
+  background-image: url("./assets/search.001.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 110px;
+  width: 500px;
+  border-radius: 15px;
+}
+
+input#search {
+  width: 390px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+button#search {
+  margin-left: 10px;
+}
+
+/*.ui.form.hashtag-search{
+  padding: 5px;
+  width: 400px;
+  margin-left: 45px;
+}*/

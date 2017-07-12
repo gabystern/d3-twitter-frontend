@@ -1,0 +1,68 @@
+.toolTip {
+  position: absolute;
+  display: none;
+  min-width: 80px;
+  height: auto;
+  background: none repeat scroll 0 0 #ffffff;
+  border: 1px solid #6F257F;
+  padding: 14px;
+  text-align: center;
+}
+
+#chart {
+  position: relative;
+  width: 1250px;
+  display: block;
+  margin: auto;
+  margin-top: -100px;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: left;
+    width: 400px;
+    height: 40px;
+    padding: 2px;
+    font: 12px sans-serif;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.line {
+  fill: none;
+  stroke: url(#line-gradient);
+  shape-rendering: crispEdges;
+}
+
+g.display {
+  z-index: -1;
+  transition: width 2s;
+  background: #ffff;
+  height: 100%
+}
+
+div.ui.segment.stats {
+  text-align: center;
+  height: 60px;
+}
+
+#download {
+  margin-top: 10px;
+}
+
+div.ui.centered.container.one.column.grid.graph-search{
+  margin-top:10px;
+}
+
+.loader {
+  transition: .5s ease;
+  z-index: 1;
+  padding-left: 950px;
+  padding-right: auto;
+  padding-top: 20px;
+}
+
+.avg-sentiment {
+  margin-right: 40px;
+}

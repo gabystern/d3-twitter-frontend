@@ -1,0 +1,72 @@
+/*both pages*/
+.ui.huge.header {
+  padding: 20px;
+  font-size: 3em;
+}
+
+.ui.large.header {
+  font-size: 2.2em;
+  position: relative;
+}
+
+/*.row.content {
+  height: 500px;
+}*/
+/*welcome page*/
+body#welcome-body{
+  background-color: #CAEBFF;
+  background-size: cover;
+  height: 100vh;
+}
+
+.welcome {
+  background-image: url("./assets/background2.001.jpeg");
+  background-repeat: no-repeat;
+  opacity: 0.98;
+}
+
+.slick-list{
+  background-color: #CAEBFF;
+  opacity: 0.7;
+}
+
+.slick-track {
+  margin-left: 200px;
+}
+
+#welcome-header {
+  margin-top: 50px;
+  margin-bottom: -20px;
+}
+
+#welcome-text {
+  margin: 0px;
+}
+
+a.ui.button {
+  margin-left: 900px;
+  margin-right: auto;
+}
+
+/*homepage*/
+body#home {
+  background-image: url("./assets/background.001.jpeg");
+  background-size: cover;
+  height: 100vh;
+}
+
+div.columns {
+  background-color: white;
+  opacity: 0.85;
+  margin:10px;
+  width: 600px;
+  height: 400px;
+}
+
+div.ui.huge.center.aligned.header.graphs-header{
+  margin-top:20px;
+}
+
+div.ui.large.center.aligned.header {
+  margin-top: 30px;
+}

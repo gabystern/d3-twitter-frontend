@@ -19,11 +19,11 @@ export default class StreamCalculations extends Component {
     let truncated = Math.floor(avg * 100) / 100
     let sentiment = ""
     if (avg > 0.1){
-      sentiment = "positive"
+      sentiment = "POSITIVE"
     } else if (avg < -0.1){
-      sentiment = "negative"
+      sentiment = "NEGATIVE"
     } else {
-      sentiment = "neutral"
+      sentiment = "NEUTRAL"
     }
 
     let maxContent = ''
@@ -56,22 +56,17 @@ export default class StreamCalculations extends Component {
       return (
           <Grid.Row>
             <Segment.Group horizontal>
-              <Segment>
-                <Statistic size='tiny'>
-                  <Statistic.Value text> {sentiment} </Statistic.Value>
-                  <Statistic.Label>Average Sentiment</Statistic.Label>
-                </Statistic>
-                <Divider />
-                <Statistic size='tiny'>
-                  <Statistic.Value text> {truncated} </Statistic.Value>
-                  <Statistic.Label>Average Sentiment Rating</Statistic.Label>
-                </Statistic>
+              <Segment size="small">
+                <p className="avg-sentiment"><strong>{sentiment}</strong><br></br>Average Sentiment</p>
               </Segment>
-              <Segment>
-                <p className='sentiment-text'><strong>Most Positive Tweet:</strong><br></br>{maxContent}</p>
+              <Segment size="small">
+                <p><strong>{truncated}</strong><br></br>Average Sentiment Rating</p>
               </Segment>
-              <Segment>
-                <p className='sentiment-text'><strong>Most Negative Tweet:</strong><br></br>{minContent} </p>
+              <Segment size="small">
+                <p><strong>Most Positive Tweet:</strong><br></br>{maxContent}</p>
+              </Segment>
+              <Segment size="small">
+                <p><strong>Most Negative Tweet:</strong><br></br>{minContent} </p>
               </Segment>
             </Segment.Group>
           </Grid.Row>
