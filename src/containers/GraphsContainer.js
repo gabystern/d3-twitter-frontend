@@ -10,7 +10,7 @@ import DownloadButton from '../components/DownloadButton'
 import StreamCalculations from '../components/StreamCalculations'
 import { Route, Switch } from 'react-router-dom'
 import { saveSvgAsPng } from 'save-svg-as-png'
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 const tweetsDevURL = 'https://localhost:3000/api/v1/tweets'
 const tweetsProdURL = 'https://twending-api.herokuapp.com/api/v1/tweets'
@@ -51,7 +51,8 @@ class GraphsContainer extends Component {
     })
   }
 
-  handleClick() {
+  handleClick(event) {
+
     this.startLoader()
 
     TweetsAdapter.fetchTweets(this.state.searchTerm)
@@ -76,14 +77,14 @@ class GraphsContainer extends Component {
             <Route exact path ='/' render={() => < WelcomePage /> } />
             <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
             <Route exact path="/twitterplot" render={()=>
-            <Grid container centered columns={1} className="graph-search">
+              <Grid centered>
               < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
-              < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/>
-            </Grid>} />
+              < ScatterPlot tweets={this.state.tweets} />
+             </Grid>} />
             <Route exact path="/sentiment" render={()=>
-              <Grid container centered columns={1} className="graph-search">
-                < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
-                < StreamGraph tweets={this.state.tweets} />
+              <Grid centered>
+              < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
+              < StreamGraph tweets={this.state.tweets} />
               </Grid>} />
           </Switch>
           <img className="loader" src="../assets/LoaderSmall.gif" />
@@ -97,15 +98,15 @@ class GraphsContainer extends Component {
             <Route exact path ='/' render={() => < WelcomePage /> } />
             <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
             <Route exact path="/twitterplot" render={()=>
-              <Grid container centered columns={1} className="graph-search">
+              <Grid centered>
               < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
-              < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/> </Grid>} />
-            <Route exact path="/sentiment" render={()=>
-              <Grid container centered columns={1} className="graph-search">
-                < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
-                < StreamGraph tweets={this.state.tweets} />
-                < Grid.Row centered columns={1}><Grid.Column>< StreamCalculations tweets={this.state.tweets}/></Grid.Column></Grid.Row>
+              < ScatterPlot tweets={this.state.tweets} />
               </Grid>} />
+            <Route exact path="/sentiment" render={()=>
+              <Grid centered>
+              < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
+              < StreamGraph tweets={this.state.tweets} />
+              <Grid.Row centered columns={1}><Grid.Column>< StreamCalculations tweets={this.state.tweets}/></Grid.Column></Grid.Row> </Grid>} />
           </Switch>
         </div>
       )
@@ -117,16 +118,16 @@ class GraphsContainer extends Component {
             <Route exact path ='/' render={() => < WelcomePage /> } />
             <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
             <Route exact path="/twitterplot" render={()=>
-              <Grid container centered columns={1} className="graph-search">
+              <Grid centered>
                 < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
-                < ScatterPlot tweets={this.state.tweets} loader={this.state.loader}/><br/>
-                < Grid.Row centered columns={1}><Grid.Column>< Segment basic size='large'>Hover over each bubble to check out the tweets.</Segment>< DownloadButton handleClick={this.handleClickDownload}/></Grid.Column></Grid.Row>
-              </Grid>} />
+                < ScatterPlot tweets={this.state.tweets} />
+                < DownloadButton handleClick={this.handleClickDownload} />
+                </Grid>} />
             <Route exact path="/sentiment" render={()=>
-              <Grid container centered columns={1} className="graph-search">
-                < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
-                < StreamGraph tweets={this.state.tweets} />
-                < Grid.Row centered columns={1}><Grid.Column>< StreamCalculations tweets={this.state.tweets}/>< DownloadButton handleClick={this.handleClickDownload} /> </Grid.Column></Grid.Row>
+              <Grid centered>
+              <SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
+              < StreamGraph tweets={this.state.tweets} />
+              <Grid.Row centered columns={1}><Grid.Column>< StreamCalculations tweets={this.state.tweets}/>< DownloadButton handleClick={this.handleClickDownload} /> </Grid.Column></Grid.Row>
               </Grid>} />
           </Switch>
         </div>
