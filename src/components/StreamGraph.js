@@ -145,9 +145,6 @@ export default class StreamGraph extends Component {
 
   componentDidUpdate(prevProps){
     if (prevProps.tweets.length !== 0 && this.props.tweets !== prevProps.tweets) {
-      let root = document.getElementById('root')
-      let chart = document.getElementById('chart')
-      chart.parentNode.removeChild(chart)
       this.createSvg()
       this.plot(d3.select(".display"), this.props.tweets)
     }

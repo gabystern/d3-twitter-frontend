@@ -26,6 +26,7 @@ class GraphsContainer extends Component {
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.removeGraph = this.removeGraph.bind(this)
   }
 
   handleChange(event){
@@ -41,15 +42,23 @@ class GraphsContainer extends Component {
     })
   }
 
+  removeGraph(){
+    if (this.state.tweets.length !== 0){
+      let root = document.getElementById('root')
+      let chart = document.getElementById('chart')
+      chart.parentNode.removeChild(chart)
+    }
+  }
+
   handleClick(event) {
 
     this.startLoader()
-
+    this.removeGraph()
     TweetsAdapter.fetchTweets(this.state.searchTerm)
     .then(tweets => this.setState({
             tweets: tweets,
             loader: false
-          }))
+    }))
     }
 
   handleClickDownload(){
