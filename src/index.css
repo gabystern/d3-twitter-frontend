@@ -23,7 +23,26 @@ p {
   width: 1250px;
   display: block;
   margin: auto;
-  margin-top: -25px;
+}
+
+#chart.scatter{
+  position: relative;
+  width: 1250px;
+  display: block;
+  margin: auto;
+  margin-top: -20px;
+}
+
+div.graph-top{
+  height: 340px;
+}
+
+.scatter {
+  position: relative;
+  width: 1250px;
+  display: block;
+  margin: auto;
+  margin-top: -20px;
 }
 
 div.tooltip {
@@ -67,6 +86,7 @@ div.ui.centered.container.one.column.grid.graph-search{
   padding-top: 20px;
   margin: auto;
   display: block;
+  padding-bottom: 140px;
 }
 
 .scatter-info {
@@ -171,7 +191,7 @@ div.columns {
   height: 400px;
 }
 
-div.column.calc-column {
+div.centered.one.column.row.calc-column {
   height: 150px;
 }
 

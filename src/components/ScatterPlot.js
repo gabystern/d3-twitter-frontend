@@ -30,6 +30,7 @@ export default class ScatterPlot extends Component {
     let svg = select("#root")
       .append("svg")
         .attr("id", "chart")
+        .classed("scatter", true)
         .attr("width", this.w)
         .attr("height", this.h)
         .attr("align","center")

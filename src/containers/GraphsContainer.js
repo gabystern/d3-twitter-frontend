@@ -15,27 +15,17 @@ import { Grid, Segment } from 'semantic-ui-react'
 const tweetsDevURL = 'https://localhost:3000/api/v1/tweets'
 const tweetsProdURL = 'https://twending-api.herokuapp.com/api/v1/tweets'
 
-const chartsDevURL = 'https://localhost:3000/api/v1/charts'
-const chartsProdURL = 'https://twending-api.herokuapp.com/api/v1/charts'
-
 class GraphsContainer extends Component {
 
   constructor(){
     super()
     this.state = {
-      charts: [],
       tweets: [],
       searchTerm: "",
       loader: false
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
-  }
-
-  componentDidMount(){
-    fetch(chartsProdURL)
-    .then(resp => resp.json())
-    .then(charts => { this.setState({ charts })})
   }
 
   handleChange(event){
@@ -113,7 +103,7 @@ class GraphsContainer extends Component {
       )
     } else {
       return (
-        <div>
+        <div className='graph-top'>
           < NavBar />
           <Switch>
             <Route exact path ='/' render={() => < WelcomePage /> } />
@@ -128,7 +118,7 @@ class GraphsContainer extends Component {
               <Grid container centered columns={1} className="graph-search">
               <SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
               < StreamGraph tweets={this.state.tweets} />
-              <Grid.Row centered columns={1}><Grid.Column className="calc-column">< StreamCalculations tweets={this.state.tweets}/>< DownloadButton handleClick={this.handleClickDownload} /> </Grid.Column></Grid.Row>
+              <Grid.Row centered columns={1} className="calc-column"><Grid.Column>< StreamCalculations tweets={this.state.tweets}/>< DownloadButton handleClick={this.handleClickDownload} /> </Grid.Column></Grid.Row>
               </Grid>} />
           </Switch>
         </div>
