@@ -14,7 +14,7 @@ export default class StreamGraph extends Component {
     this.data = this.props.tweets
 
     this.margin = {
-      top: 60,
+      top: 10,
       bottom: 80,
       left: 80,
       right: 80
