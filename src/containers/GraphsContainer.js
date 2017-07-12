@@ -77,12 +77,12 @@ class GraphsContainer extends Component {
             <Route exact path ='/' render={() => < WelcomePage /> } />
             <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
             <Route exact path="/twitterplot" render={()=>
-              <Grid centered>
+              <Grid container centered columns={1} className="graph-search">
               < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
               < ScatterPlot tweets={this.state.tweets} />
              </Grid>} />
             <Route exact path="/sentiment" render={()=>
-              <Grid centered>
+              <Grid container centered columns={1} className="graph-search">
               < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
               < StreamGraph tweets={this.state.tweets} />
               </Grid>} />
@@ -98,12 +98,12 @@ class GraphsContainer extends Component {
             <Route exact path ='/' render={() => < WelcomePage /> } />
             <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
             <Route exact path="/twitterplot" render={()=>
-              <Grid centered>
+              <Grid container centered columns={1} className="graph-search">
               < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
               < ScatterPlot tweets={this.state.tweets} />
               </Grid>} />
             <Route exact path="/sentiment" render={()=>
-              <Grid centered>
+              <Grid container centered columns={1} className="graph-search">
               < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
               < StreamGraph tweets={this.state.tweets} />
               <Grid.Row centered columns={1}><Grid.Column>< StreamCalculations tweets={this.state.tweets}/></Grid.Column></Grid.Row> </Grid>} />
@@ -118,13 +118,13 @@ class GraphsContainer extends Component {
             <Route exact path ='/' render={() => < WelcomePage /> } />
             <Route exact path ='/home' render={() => <div>< HomePage /></div> } />
             <Route exact path="/twitterplot" render={()=>
-              <Grid centered>
+              <Grid container centered columns={1} className="graph-search">
                 < SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
                 < ScatterPlot tweets={this.state.tweets} />
-                < DownloadButton handleClick={this.handleClickDownload} />
+                <Grid.Row centered columns={1}><Grid.Column>< DownloadButton handleClick={this.handleClickDownload} /></Grid.Column></Grid.Row>
                 </Grid>} />
             <Route exact path="/sentiment" render={()=>
-              <Grid centered>
+              <Grid container centered columns={1} className="graph-search">
               <SearchBar searchTerm={this.state.searchTerm} handleClick={this.handleClick} handleChange={(event) => this.handleChange(event)} />
               < StreamGraph tweets={this.state.tweets} />
               <Grid.Row centered columns={1}><Grid.Column>< StreamCalculations tweets={this.state.tweets}/>< DownloadButton handleClick={this.handleClickDownload} /> </Grid.Column></Grid.Row>

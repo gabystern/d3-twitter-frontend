@@ -56,16 +56,16 @@ export default class StreamCalculations extends Component {
       return (
           <Grid.Row>
             <Segment.Group horizontal>
-              <Segment size="small">
+              <Segment size="tiny" className="avg-sentiment-segment">
                 <p className="avg-sentiment"><strong>{sentiment}</strong><br></br>Average Sentiment</p>
               </Segment>
-              <Segment size="small">
+              <Segment size="tiny">
                 <p><strong>{truncated}</strong><br></br>Average Sentiment Rating</p>
               </Segment>
-              <Segment size="small">
+              <Segment size="tiny">
                 <p><strong>Most Positive Tweet:</strong><br></br>{maxContent}</p>
               </Segment>
-              <Segment size="small">
+              <Segment size="tiny">
                 <p><strong>Most Negative Tweet:</strong><br></br>{minContent} </p>
               </Segment>
             </Segment.Group>

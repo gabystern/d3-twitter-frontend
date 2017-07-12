@@ -23,7 +23,7 @@ p {
   width: 1250px;
   display: block;
   margin: auto;
-  margin-top: -20px;
+  margin-top: -25px;
 }
 
 div.tooltip {
@@ -56,10 +56,6 @@ div.ui.segment.stats {
   height: 60px;
 }
 
-#download {
-  margin-top: 10px;
-}
-
 div.ui.centered.container.one.column.grid.graph-search{
   margin-top:10px;
 }
@@ -73,7 +69,11 @@ div.ui.centered.container.one.column.grid.graph-search{
 }
 
 .avg-sentiment {
-  margin-right: 40px;
+  width: 100px;
+}
+
+div.ui.tiny.segment.avg-sentiment-segment {
+  width: 230px;
 }
 
 form.ui.form.searchbar {
