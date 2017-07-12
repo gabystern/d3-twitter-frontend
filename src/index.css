@@ -63,9 +63,14 @@ div.ui.centered.container.one.column.grid.graph-search{
 .loader {
   transition: .5s ease;
   z-index: 1;
-  padding-left: 950px;
   padding-right: auto;
   padding-top: 20px;
+  margin: auto;
+  display: block;
+}
+
+.scatter-info {
+  padding:0px;
 }
 
 .avg-sentiment {
@@ -164,6 +169,10 @@ div.columns {
   margin:10px;
   width: 600px;
   height: 400px;
+}
+
+div.column.calc-column {
+  height: 150px;
 }
 
 div.ui.huge.center.aligned.header.graphs-header{
