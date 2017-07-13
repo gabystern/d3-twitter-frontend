@@ -61,7 +61,7 @@ class GraphsContainer extends Component {
             tweets: tweets,
             loader: false
     }))
-    debugger
+
     if (this.state.tweets === undefined){
       return alert("Hello! I am an alert box!!");
     }
