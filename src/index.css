@@ -157,9 +157,9 @@ body#welcome-body{
   opacity: 0.7;
 }
 
-.slick-track {
+/*.slick-track {
   margin-left: 200px;
-}
+}*/
 
 #welcome-header {
   margin-top: 50px;
@@ -171,8 +171,9 @@ body#welcome-body{
 }
 
 a.ui.button {
-  margin-left: 900px;
-  margin-right: auto;
+  display: block;
+  margin: auto;
+  width: 150px;
 }
 
 /*homepage*/

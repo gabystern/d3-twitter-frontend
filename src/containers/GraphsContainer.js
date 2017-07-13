@@ -51,21 +51,26 @@ class GraphsContainer extends Component {
   }
 
   handleClick(event) {
+    event.preventDefault()
 
     this.startLoader()
     this.removeGraph()
+
     TweetsAdapter.fetchTweets(this.state.searchTerm)
     .then(tweets => this.setState({
             tweets: tweets,
             loader: false
     }))
+    debugger
+    if (this.state.tweets === undefined){
+      return alert("Hello! I am an alert box!!");
+    }
     }
 
   handleClickDownload(){
     let element = document.getElementById('chart')
     saveSvgAsPng(element, "graph.png", {width: 1400});
   }
-
 
   render() {
     if (this.state.loader === true){
@@ -132,8 +137,8 @@ class GraphsContainer extends Component {
           </Switch>
         </div>
       )
+    }
   }
-}
 }
 
 export default GraphsContainer;

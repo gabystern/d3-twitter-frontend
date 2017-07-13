@@ -8,6 +8,11 @@ class WelcomeCarousel extends Component {
       dots: true,
       autoplay: true,
       autoplaySpeed: 2500,
+      responsive: [
+      {
+        breakpoint: 768, settings: "unslick",
+      },
+    ],
     }
     return (
       <Slider {...settings}>
