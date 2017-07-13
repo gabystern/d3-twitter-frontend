@@ -114,7 +114,7 @@ export default class ScatterPlot extends Component {
           } else if (d.retweet_count >= 4) {
             return 'FFDC62'
           } else if (d.retweet_count < 4) {
-            return '70FFF1'
+            return '6DE6F1'
           }
         })
         .style("opacity", 0.8)

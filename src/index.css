@@ -20,7 +20,7 @@ p {
 
 #chart {
   position: relative;
-  width: 1250px;
+  width: 100vw;
   display: block;
   margin: auto;
 }
@@ -202,7 +202,8 @@ div.ui.huge.center.aligned.header.graphs-header{
 div.ui.large.center.aligned.header {
   margin-top: 30px;
 }
-
+a { color: black; }
+a​:active { color: black; }
 
 
 /*#welcome {
