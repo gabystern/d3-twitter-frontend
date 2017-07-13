@@ -30,8 +30,8 @@ const HomePage = (props) => {
             </Grid.Column></a>
             </div>
           <div className="columns">
-            <Grid.Column className="graph-section">
-              <a href="https://twending-client.herokuapp.com/sentiment"><Header size='large' textAlign='center'>Sentiment Analyzer</Header></a>
+            <a href="https://twending-client.herokuapp.com/sentiment"><Grid.Column className="graph-section">
+              <Header size='large' textAlign='center'>Sentiment Analyzer</Header>
               <Segment basic size='large'>
                 See how people are feeling about a topic or event by visualizing the sentiment analysis of tweets.
               </Segment>
@@ -40,7 +40,7 @@ const HomePage = (props) => {
                 as='a' size='big'
                 href='https://twending-client.herokuapp.com/sentiment'
               />
-            </Grid.Column>
+            </Grid.Column></a>
           </div>
         </Grid.Row>
       </Grid>
