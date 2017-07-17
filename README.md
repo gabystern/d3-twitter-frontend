@@ -1,18 +1,18 @@
 # Twending
 > Visualize patterns in how the world is talking. <br>
 
-Twending is an data visualization tool that enables users to search tweets by hashtag and create a variety of interactive graphs to map the prevalence/impact of a hashtag over a period of time as well as an average sentiment towards that hashtag. Twending has a React frontend with graphs built using D3.js and a <a href="https://github.com/gabystern/d3-twitter-backend">Rails backend</a>. 
+Twending is an data visualization tool that enables users to search tweets by hashtag and create a variety of interactive graphs to map the prevalence/impact of a hashtag over a period of time as well as an average sentiment towards that hashtag. Twending has a React frontend with graphs built using D3.js and a <a href="https://github.com/gabystern/d3-twitter-backend">Rails backend</a>.
 
 # Wireframes
 ## Landing Page
 See examples of graphs before you sign up
 
- ![Alt text](./public/assets/Landing_Page.png?raw=true "Title")
+ ![Alt text](./public/assets/vid1.gif?raw=true "Title")
 
 ## User Homepage
 See all of your saved searchess and click in navbar to create a new search
 
- ![Alt text](./public/assets/User_Home_Screen.png?raw=true "Title")
+ ![Alt text](./public/assets/vid2.gif?raw=true "Title")
 
 ## Create a New Search
 Search a Twitter hashtag to get populated graphs and save the search to your profile
