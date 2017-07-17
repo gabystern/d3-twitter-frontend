@@ -3,26 +3,21 @@
 
 Twending is an data visualization tool that enables users to search tweets by hashtag and create a variety of interactive graphs to map the prevalence/impact of a hashtag over a period of time as well as an average sentiment towards that hashtag. Twending has a React frontend with graphs built using D3.js and a <a href="https://github.com/gabystern/d3-twitter-backend">Rails backend</a>.
 
-# Wireframes
-## Landing Page
-See examples of graphs before you sign up
+# Demo
+## TwitterPlot
+Create a scatterplot graph that shows the latest tweets based on searched hashtag. Dots are plotted by time tweeted and number of retweets. Dot size and color are determined by number of retweets.
 
- ![Alt text](./public/assets/vid1.gif?raw=true "Title")
+Download the graph as a PNG to your computer.
 
-## User Homepage
-See all of your saved searchess and click in navbar to create a new search
+ ![Alt text](./public/assets/vid1.gif?raw=true "TwitterPlot")
 
- ![Alt text](./public/assets/vid2.gif?raw=true "Title")
+## Sentiment Chart
+View the average sentiment of tweets based on a given hashtag. Tweets are analyzed using the ruby gem <a href="https://github.com/7compass/sentimental">sentimental</a>. An area graph is created based on the sentiment score of each tweet and mapped over time. Detailed information on the average score as well as the most positively and negatively scored tweets are given.
 
-## Create a New Search
-Search a Twitter hashtag to get populated graphs and save the search to your profile
+Download the graph as a PNG to your computer.
 
- ![Alt text](./public/assets/Create_New_Graph.png?raw=true "Title")
+ ![Alt text](./public/assets/vid2.gif?raw=true "Sentiment")
 
-## View Graphs & Download as an SVG
-View previously created graphs and download them to your computer to embed in articles or presentations.
-
- ![Alt text](./public/assets/Saved_Graph.png?raw=true "Title")
 
 # Stack
 - React Frontend
