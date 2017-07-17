@@ -5,7 +5,7 @@ Twending is an data visualization tool that enables users to search tweets by ha
 
 # Demo
 ## TwitterPlot
-Create a scatterplot graph that shows the latest tweets based on searched hashtag. Dots are plotted by time tweeted and number of retweets. Dot size and color are determined by number of retweets.
+Create a scatterplot graph that shows the latest tweets based on searched hashtag. Dots are plotted by time tweeted and number of retweets. Dot size and color are determined by number of retweets. Mouse over each dot to see information about each tweet!
 
 Download the graph as a PNG to your computer.
 
